@@ -9,6 +9,7 @@ namespace Tackle.Pages
 {
     class LogInModel : PropertyChangedBase
     {
+        //Property declaration
         private string _username;
         private string _unencryptedPassword;
         private string _buttonClickable;
@@ -29,6 +30,20 @@ namespace Tackle.Pages
         {
             get { return this._buttonClickable; }
             set { SetAndNotify(ref this._buttonClickable, value); }
+        }
+
+        //Business logic
+        public string EncryptPassword(string unencryptedPassword)
+        {
+            /*
+            Converts the unencrypted password into a byte array, encrypts it using SHA256, and then converts it 
+            back into a string
+            */
+            byte[] byteArray = System.Text.Encoding.ASCII.GetBytes(unencryptedPassword);
+            byteArray = new System.Security.Cryptography.SHA256Managed().ComputeHash(byteArray);
+            string encryptedPassword = System.Text.Encoding.ASCII.GetString(byteArray);
+
+            return encryptedPassword;
         }
     }
 }
