@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Networking;
 
 namespace Tackle.Pages
 {
@@ -27,10 +28,36 @@ namespace Tackle.Pages
         }
         public void SignUpSubmit()
         {
+            ServerConnection server = new ServerConnection();
+
             Details.ButtonClickable = "False";
             string encryptedPassword = Details.EncryptPassword(Details.UnencryptedPassword);
-        }
+            string isTeacher;
+            if(Details.IsTeacher)
+            {
+                isTeacher = "1";
+            }
+            else
+            {
+                isTeacher = "0";
+            }
 
-        
+            string[] requestArgs = new string[] { Details.Username, encryptedPassword,isTeacher };
+
+            bool signUpRequestSuccess = server.ServerRequest("SIGNUP", requestArgs);
+
+            if (signUpRequestSuccess is true)
+            {
+                //raise event
+                
+            }
+            else
+            {
+                MessageBox.Show("Sign up unsuccessful. Check internet connection or try a different username");
+                Details.ButtonClickable = "True";
+            }
+
+            
+        }
     }
 }

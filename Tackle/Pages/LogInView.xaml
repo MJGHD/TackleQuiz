@@ -26,6 +26,11 @@
             <TextBlock>Password:</TextBlock>
             <TextBox Margin="0,5,0,5" Text="{Binding Path=Details.UnencryptedPassword}"></TextBox>
 
+            <StackPanel HorizontalAlignment="Center" Background="LightGray" Margin="0,5,0,5">
+                <TextBlock Margin="5,0,5,0">Sign up only:</TextBlock>
+                <CheckBox Margin="0,5,0,5" Content="Teacher" IsChecked="{Binding Path=Details.IsTeacher}"/>
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Margin="0,0,10,0" Command="{s:Action LogInSubmit}" IsEnabled="{Binding Path=Details.ButtonClickable}">Log In</Button>
                 <Button Command="{s:Action SignUpSubmit}" IsEnabled="{Binding Path=Details.ButtonClickable}">Sign Up</Button>

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Myles\Documents\C#\Projects\Tackle\Tackle\obj\Debug\
+C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\
 Tackle
 none
 false
 DEBUG;TRACE
-C:\Users\Myles\Documents\C#\Projects\Tackle\Tackle\App.xaml
-2-1626401246
+C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\App.xaml
+41892109944
 
-13486342839
-14561456488
-Pages\LogInView.xaml;Pages\ShellView.xaml;
+16-532516382
+151822993502
+Pages\LogInView.xaml;Pages\ShellView.xaml;Pages\StudentMainMenuView.xaml;Pages\TeacherMainModelView.xaml;
 
 True
 

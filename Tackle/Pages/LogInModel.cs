@@ -13,6 +13,7 @@ namespace Tackle.Pages
         private string _username;
         private string _unencryptedPassword;
         private string _buttonClickable;
+        private bool _isTeacher;
 
         public string Username
         {
@@ -31,6 +32,13 @@ namespace Tackle.Pages
             get { return this._buttonClickable; }
             set { SetAndNotify(ref this._buttonClickable, value); }
         }
+
+        public bool IsTeacher
+        {
+            get { return _isTeacher; }
+            set { SetAndNotify(ref this._isTeacher, value); }
+        }
+
 
         //Business logic
         public string EncryptPassword(string unencryptedPassword)
