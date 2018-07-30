@@ -1,12 +1,7 @@
-﻿using Stylet;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using Networking;
+﻿using System.Windows;
+using HandyStuff;
+using System.Windows.Controls;
+using Stylet;
 
 namespace Tackle.Pages
 {
@@ -15,23 +10,28 @@ namespace Tackle.Pages
         //Property containing all of the properties in the LogInModel
         public LogInModel Details { get; set; }
 
-        public LogInViewModel()
+        private IEventAggregator eventAggregator;
+
+        public LogInViewModel(IEventAggregator eventAggregator)
         {
             Details = new LogInModel();
             Details.ButtonClickable = "True";
+            this.eventAggregator = eventAggregator;
         }
 
         public void LogInSubmit()
         {
             Details.ButtonClickable = "False";
-            string encryptedPassword = Details.EncryptPassword(Details.UnencryptedPassword);
         }
-        public void SignUpSubmit()
+
+        public void SignUpSubmit(object passwordBoxParameter)
         {
             ServerConnection server = new ServerConnection();
-
+            var passwordBox = (PasswordBox)passwordBoxParameter;
             Details.ButtonClickable = "False";
-            string encryptedPassword = Details.EncryptPassword(Details.UnencryptedPassword);
+            string SHA256Password = Details.EncryptPassword(passwordBox.Password);
+            passwordBox.Clear();
+
             string isTeacher;
             if(Details.IsTeacher)
             {
@@ -42,14 +42,22 @@ namespace Tackle.Pages
                 isTeacher = "0";
             }
 
-            string[] requestArgs = new string[] { Details.Username, encryptedPassword,isTeacher };
+            string[] requestArgs = new string[] { Details.Username, SHA256Password,isTeacher };
 
             bool signUpRequestSuccess = server.ServerRequest("SIGNUP", requestArgs);
 
             if (signUpRequestSuccess is true)
             {
-                //raise event
-                
+                ChangePageEvent pageEvent = new ChangePageEvent();
+                if(isTeacher == "1")
+                {
+                    pageEvent.pageName = "TeacherMainMenu";
+                }
+                else
+                {
+                    pageEvent.pageName = "StudentMainMenu";
+                }
+                this.eventAggregator.Publish(pageEvent);
             }
             else
             {

@@ -44,8 +44,8 @@ C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debu
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Tackle.exe
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Tackle.pdb
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Pages\StudentMainMenuView.g.cs
-C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Pages\TeacherMainModelView.g.cs
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Pages\StudentMainMenuView.baml
-C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Pages\TeacherMainModelView.baml
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Pages\TeacherMainMenuView.g.cs
+C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Pages\TeacherMainMenuView.baml

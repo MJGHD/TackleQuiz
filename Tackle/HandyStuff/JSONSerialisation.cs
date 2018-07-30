@@ -5,12 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace JSONSerialise
+namespace HandyStuff
 {
-    class JSONSerialisation
-    {
-    }
-
     class ServerRequest
     {
         public string requestSource;

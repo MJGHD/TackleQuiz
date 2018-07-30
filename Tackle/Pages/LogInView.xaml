@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:uc="using:UserAndCustomControls"
              xmlns:local="clr-namespace:Tackle.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900">
@@ -21,10 +22,11 @@
         
         <StackPanel Width="250" Grid.Row="2">
             <TextBlock>Username:</TextBlock>
-            <TextBox Margin="0,5,0,5" Text="{Binding Path=Details.Username}"></TextBox>
-            
+            <TextBox Margin="0,5,0,5" Text="{Binding Path=Details.Username}"/>
+
             <TextBlock>Password:</TextBlock>
-            <TextBox Margin="0,5,0,5" Text="{Binding Path=Details.UnencryptedPassword}"></TextBox>
+            <PasswordBox Name="passwordBox"/>
+            <!--<TextBox Margin="0,5,0,5" Text="{Binding Path=Details.UnencryptedPassword}"/>-->
 
             <StackPanel HorizontalAlignment="Center" Background="LightGray" Margin="0,5,0,5">
                 <TextBlock Margin="5,0,5,0">Sign up only:</TextBlock>
@@ -32,8 +34,8 @@
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Margin="0,0,10,0" Command="{s:Action LogInSubmit}" IsEnabled="{Binding Path=Details.ButtonClickable}">Log In</Button>
-                <Button Command="{s:Action SignUpSubmit}" IsEnabled="{Binding Path=Details.ButtonClickable}">Sign Up</Button>
+                <Button Margin="0,0,10,0" Command="{s:Action LogInSubmit}" CommandParameter="{Binding passwordBox}" IsEnabled="{Binding Path=Details.ButtonClickable}">Log In</Button>
+                <Button Command="{s:Action SignUpSubmit}" IsEnabled="{Binding Path=Details.ButtonClickable}" CommandParameter="{Binding ElementName=passwordBox, Mode=OneWay}" >Sign Up</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -6,9 +6,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using JSONSerialise;
 
-namespace Networking
+namespace HandyStuff
 {
     //TODO: Make all of this networking stuff async if needed
     class ServerConnection
