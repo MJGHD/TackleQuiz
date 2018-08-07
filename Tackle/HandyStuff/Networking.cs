@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,9 +11,10 @@ using System.Threading.Tasks;
 namespace HandyStuff
 {
     //TODO: Make all of this networking stuff async if needed
+    //TODO: Make server response JSON
     class ServerConnection
     {
-        public bool ServerRequest(string source, string[] parameters)
+        public string ServerRequest(string source, string[] parameters)
         {
             IPAddress ServerIP = IPAddress.Parse("192.168.1.133");
             TcpClient client = new TcpClient();
@@ -31,18 +33,34 @@ namespace HandyStuff
             stream.Write(messageToServer, 0, messageToServer.Length);
 
             //Handling the response from the server based on the page that the request came from
-            if(serialisation.requestSource == "SIGNUP")
+            if(serialisation.requestSource == "SIGNUP" || serialisation.requestSource == "LOGIN")
             {
-                byte[] readBuffer = new byte[128];
+                byte[] readBuffer = new byte[64];
+
                 stream.Read(readBuffer, 0, readBuffer.Length);
-                string messageFromServer = Encoding.ASCII.GetString(readBuffer);
-                Debug.Write(messageFromServer);
-                return true;
+                string messageFromServer = Encoding.Default.GetString(readBuffer);
+
+                LogInResponse response = JsonConvert.DeserializeObject<LogInResponse>(messageFromServer);
+
+                if (response.requestSuccess)
+                {
+                    return response.userType.ToString();
+                }
+                else
+                {
+                    return "FAILED";
+                }
             }
             else
             {
-                return false;
+                return "asdf";
             }
         }
+    }
+
+    class LogInResponse
+    {
+        public bool requestSuccess;
+        public int userType;
     }
 }

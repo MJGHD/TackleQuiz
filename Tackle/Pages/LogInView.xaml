@@ -34,7 +34,7 @@
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Margin="0,0,10,0" Command="{s:Action LogInSubmit}" CommandParameter="{Binding passwordBox}" IsEnabled="{Binding Path=Details.ButtonClickable}">Log In</Button>
+                <Button Margin="0,0,10,0" Command="{s:Action LogInSubmit}" CommandParameter="{Binding ElementName=passwordBox, Mode=OneWay}" IsEnabled="{Binding Path=Details.ButtonClickable}">Log In</Button>
                 <Button Command="{s:Action SignUpSubmit}" IsEnabled="{Binding Path=Details.ButtonClickable}" CommandParameter="{Binding ElementName=passwordBox, Mode=OneWay}" >Sign Up</Button>
             </StackPanel>
         </StackPanel>

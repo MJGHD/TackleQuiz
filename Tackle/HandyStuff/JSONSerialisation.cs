@@ -17,6 +17,5 @@ namespace HandyStuff
             string json = JsonConvert.SerializeObject(request, Formatting.Indented);
             return json;
         }
-
     }
 }
