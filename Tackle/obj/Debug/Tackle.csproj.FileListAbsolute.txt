@@ -49,3 +49,9 @@ C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\bin\Debu
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Pages\TeacherMainMenuView.g.cs
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Pages\TeacherMainMenuView.baml
+C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Pages\QuizScreenView.g.cs
+C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\bin\Debug\System.IO.Compression.dll
+C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\bin\Debug\System.IO.Compression.ZipFile.dll
+C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\bin\Debug\System.ValueTuple.dll
+C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\bin\Debug\System.ValueTuple.xml
+C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Pages\QuizScreenView.baml

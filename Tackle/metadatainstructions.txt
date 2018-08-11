@@ -1,0 +1,5 @@
+Title
+Creator's username
+UNIX time
+whether it's an instant result quiz or not
+The time set for the quiz in seconds

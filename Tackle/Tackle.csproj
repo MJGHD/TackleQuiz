@@ -42,6 +42,17 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,8 +81,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HandyStuff\Networking.cs" />
+    <Compile Include="HandyStuff\QuizHandling.cs" />
     <Compile Include="Pages\LogInModel.cs" />
     <Compile Include="Pages\LogInViewModel.cs" />
+    <Compile Include="Pages\QuizScreenModel.cs" />
+    <Compile Include="Pages\QuizScreenViewModel.cs" />
     <Compile Include="Pages\ShellViewModel.cs" />
     <Compile Include="Pages\StudentMainMenuViewModel.cs" />
     <Compile Include="Pages\TeacherMainMenuViewModel.cs" />
@@ -103,6 +117,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Pages\LogInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuizScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

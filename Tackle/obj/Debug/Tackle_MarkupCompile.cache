@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\App.xaml
-4-243960686
+5-40810347
 
-131832257027
-151822993502
-Pages\LogInView.xaml;Pages\ShellView.xaml;Pages\StudentMainMenuView.xaml;Pages\TeacherMainMenuView.xaml;
+162022086339
+19-178724483
+Pages\LogInView.xaml;Pages\QuizScreenView.xaml;Pages\ShellView.xaml;Pages\StudentMainMenuView.xaml;Pages\TeacherMainMenuView.xaml;
 
 False
 

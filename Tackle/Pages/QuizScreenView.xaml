@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Tackle.Pages.QuizScreenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:local="clr-namespace:Tackle.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="25"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Row="0" Fill="LightGray" Grid.RowSpan="2"></Rectangle>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Right" FontSize="16" Padding="0,0,5,0" Text="{Binding Path=Model.TimeLeftDisplay}"/>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left" FontSize="16" Padding="5,0,0,0" Text="{Binding Path=Model.QuestionNumberDisplay}"/>
+
+        <Rectangle Grid.Row="1" Fill="Aqua"/>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}"/>
+
+        <TabControl SelectedIndex="{Binding Path=Model.CurrentQuestionType}" Grid.Row="2" BorderThickness="0">
+            <TabItem TabIndex="0" Width="0">
+                <TextBox Text="{Binding Path=Model.UserInput}"/>
+            </TabItem>
+            <TabItem TabIndex="1" Width="0">
+                <Grid Background="DarkGray"/>
+            </TabItem>
+        </TabControl>
+
+        <Button Grid.Row="3" HorizontalAlignment="Left" Command="{s:Action PreviousQuestion}">Previous Question</Button>
+        <Button Grid.Row="3" HorizontalAlignment="Right" Command="{s:Action NextQuestion}">Next Question</Button>
+        
+    </Grid>
+</UserControl>

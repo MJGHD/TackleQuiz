@@ -9,5 +9,6 @@ namespace HandyStuff
     public class ChangePageEvent
     {
         public string pageName;
+        int quizID;
     }
 }
