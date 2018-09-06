@@ -8,5 +8,14 @@ namespace Tackle.Pages
 {
     class TeacherMainMenuViewModel
     {
+        public TeacherMainMenuViewModel()
+        {
+
+        }
+
+        public void LoadTest()
+        {
+
+        }
     }
 }

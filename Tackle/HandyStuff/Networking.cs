@@ -16,7 +16,7 @@ namespace HandyStuff
     {
         public string ServerRequest(string source, string[] parameters)
         {
-            IPAddress ServerIP = IPAddress.Parse("192.168.1.133");
+            IPAddress ServerIP = IPAddress.Parse("10.25.130.254");
             TcpClient client = new TcpClient();
 
             //Connects the client to the server and creates a TCP communication stream
@@ -44,7 +44,7 @@ namespace HandyStuff
 
                 if (response.requestSuccess)
                 {
-                    return response.userType.ToString();
+                    return response.isTeacher.ToString();
                 }
                 else
                 {
@@ -61,6 +61,6 @@ namespace HandyStuff
     class LogInResponse
     {
         public bool requestSuccess;
-        public int userType;
+        public bool isTeacher;
     }
 }

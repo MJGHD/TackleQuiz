@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="https://github.com/canton7/Stylet"
              xmlns:local="clr-namespace:Tackle.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900">
     <Grid>
-        <ProgressBar HorizontalAlignment="Left" Height="10" Margin="128,142,0,0" VerticalAlignment="Top" Width="100"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Command="{s:Action LoadTest}">Load Test Quiz</Button>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

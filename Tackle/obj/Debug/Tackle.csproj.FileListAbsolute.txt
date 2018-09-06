@@ -55,3 +55,38 @@ C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\bin\Debu
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\bin\Debug\System.ValueTuple.dll
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\bin\Debug\System.ValueTuple.xml
 C:\Users\Myles\Documents\Computing Project\TackleMain\TackleQuiz\Tackle\obj\Debug\Pages\QuizScreenView.baml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\Tackle.exe.config
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\Tackle.exe
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\Tackle.pdb
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\Stylet.dll
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\System.IO.Compression.dll
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\System.IO.Compression.ZipFile.dll
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\System.ValueTuple.dll
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\Stylet.pdb
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\Stylet.xml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\bin\Debug\System.ValueTuple.xml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Tackle.csprojResolveAssemblyReference.cache
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\LogInView.g.cs
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\QuizScreenView.g.cs
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\ShellView.g.cs
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\StudentMainMenuView.g.cs
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\TeacherMainMenuView.g.cs
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\App.g.cs
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Tackle_MarkupCompile.cache
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Tackle_MarkupCompile.lref
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\App.baml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\LogInView.baml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\QuizScreenView.baml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\ShellView.baml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\StudentMainMenuView.baml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\TeacherMainMenuView.baml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Tackle.g.resources
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Tackle.Properties.Resources.resources
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Tackle.csproj.GenerateResource.cache
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Tackle.csproj.CoreCompileInputs.cache
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Tackle.csproj.CopyComplete
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Tackle.exe
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Tackle.pdb

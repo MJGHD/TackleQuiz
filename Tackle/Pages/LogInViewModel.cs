@@ -28,24 +28,14 @@ namespace Tackle.Pages
             string SHA256Password = Details.EncryptPassword(passwordBox.Password);
             passwordBox.Clear();
 
-            string isTeacher;
-            if(Details.IsTeacher)
-            {
-                isTeacher = "1";
-            }
-            else
-            {
-                isTeacher = "0";
-            }
-
-            string[] requestArgs = new string[] { Details.Username, SHA256Password,isTeacher };
+            string[] requestArgs = new string[] { Details.Username, SHA256Password,Details.IsTeacher.ToString() };
 
             string signUpRequest = server.ServerRequest("SIGNUP", requestArgs);
 
-            if (signUpRequest == "SUCCESS")
+            if (signUpRequest != "FAILED")
             {
                 ChangePageEvent pageEvent = new ChangePageEvent();
-                if(isTeacher == "1")
+                if(signUpRequest == "True")
                 {
                     pageEvent.pageName = "TeacherMainMenu";
                 }
