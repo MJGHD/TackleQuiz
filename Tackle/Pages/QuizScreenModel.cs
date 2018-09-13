@@ -22,6 +22,7 @@ namespace Tackle.Pages
         private int _currentQuestionType;
         private string _userInput;
         private string[] _userInputs;
+        private string _nextButtonText;
 
         public string[] Questions
         {
@@ -100,5 +101,12 @@ namespace Tackle.Pages
             get { return this._userInputs; }
             set { SetAndNotify(ref this._userInputs, value); }
         }
+
+        public string NextButtonText
+        {
+            get { return this._nextButtonText; }
+            set { SetAndNotify(ref this._nextButtonText, value); }
+        }
+
     }
 }

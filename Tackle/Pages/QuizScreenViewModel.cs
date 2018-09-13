@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Threading;
-using Tackle.HandyStuff;
+using HandyStuff;
 using Stylet;
+using System.Text.RegularExpressions;
+using System.Windows.Input;
 
 namespace Tackle.Pages
 {
     class QuizScreenViewModel
     {
+        //TODO: Make it so that when a character is added, it calls a function that checks whether it's a number (for the int input)
         int quizID;
         public QuizScreenModel Model { get; set; }
         DispatcherTimer timer;
@@ -22,24 +25,32 @@ namespace Tackle.Pages
             this.Model = new QuizScreenModel();
             SetTimerSettings();
             (Model.Questions,Model.QuestionTypes,Model.Answers,Model.QuizType,Model.TimeLeft) = QuizHandling.OpenQuiz();
+            this.Model.NextButtonText = "Next Question";
             SetFirstQuestion();
             timer.Start();
         }
 
-        public void TimerTick(object sender, EventArgs e)
+        void TimerTick(object sender, EventArgs e)
         {
             Model.TimeLeft -= 1;
-            Model.TimeLeftDisplay = $"Time left: {Model.TimeLeft} seconds";
+            if(Model.TimeLeft == 0)
+            {
+                FinishQuiz();
+            }
+            else
+            {
+                Model.TimeLeftDisplay = $"Time left: {Model.TimeLeft} seconds";
+            }
         }
 
-        public void SetTimerSettings()
+        void SetTimerSettings()
         {
             timer = new DispatcherTimer();
             timer.Tick += TimerTick;
             timer.Interval = new TimeSpan(0, 0, 1);
         }
 
-        public void SetQuestionType()
+        void SetQuestionType()
         {
             if (Model.QuestionTypes[Model.CurrentQuestionNumber] == "StringInput" || Model.QuestionTypes[Model.CurrentQuestionNumber] == "IntegerInput")
             {
@@ -54,12 +65,38 @@ namespace Tackle.Pages
         public void NextQuestion()
         {
             Model.CurrentQuestionNumber += 1;
-            Model.QuestionNumberDisplay = $"Question {Model.CurrentQuestionNumber+1}/{Model.Questions.Length}";
+            if(Model.CurrentQuestionNumber+1 == Model.Questions.Length)
+            {
+                Model.NextButtonText = "Finish Quiz";
+            }
+            else
+            {
+                Model.NextButtonText = "Next Question";
+            }
+
+            if(Model.CurrentQuestionNumber == Model.Questions.Length)
+            {
+                FinishQuiz();
+            }
+            else
+            {
+                Model.QuestionNumberDisplay = $"Question {Model.CurrentQuestionNumber + 1}/{Model.Questions.Length}";
+                SetQuestionType();
+                DisplayQuestion();
+            }
+
+        }
+
+        public void PreviousQuestion()
+        {
+            Model.NextButtonText = "Next Question";
+            Model.CurrentQuestionNumber -= 1;
+            Model.QuestionNumberDisplay = $"Question {Model.CurrentQuestionNumber + 1}/{Model.Questions.Length}";
             SetQuestionType();
             DisplayQuestion();
         }
 
-        public void DisplayQuestion()
+        void DisplayQuestion()
         {
             Model.CurrentQuestion = Model.Questions[Model.CurrentQuestionNumber];
             if(Model.QuizType == "Instant")
@@ -68,12 +105,30 @@ namespace Tackle.Pages
             }
         }
 
-        public void SetFirstQuestion()
+        void SetFirstQuestion()
         {
             Model.CurrentQuestionNumber = 0;
             Model.QuestionNumberDisplay = $"Question {Model.CurrentQuestionNumber + 1}/{Model.Questions.Length}";
             SetQuestionType();
             DisplayQuestion();
+        }
+
+        public void NumericalInputFilter(Object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsNumber(e.Text);
+        }
+
+        bool IsNumber(string userInput)
+        {
+            Regex reg = new Regex("[^0-9]");
+            return reg.IsMatch(userInput);
+        }
+
+        void FinishQuiz()
+        {
+            ChangePageEvent pageEvent = new ChangePageEvent();
+            pageEvent.pageName = "StudentMainMenu";
+            this.eventAggregator.Publish(pageEvent);
         }
     }
 }

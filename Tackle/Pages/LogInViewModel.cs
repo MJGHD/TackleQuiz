@@ -70,7 +70,7 @@ namespace Tackle.Pages
             if (!logInRequest.Equals("FAILED"))
             {
                 ChangePageEvent pageEvent = new ChangePageEvent();
-                if (logInRequest.Equals("0"))
+                if (logInRequest == "STUDENT")
                 {
                     pageEvent.pageName = "StudentMainMenu";
                 }

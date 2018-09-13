@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Stylet;
+using HandyStuff;
 
 namespace Tackle.Pages
 {
@@ -18,7 +19,9 @@ namespace Tackle.Pages
 
         public void LoadTest()
         {
-
+            ChangePageEvent pageEvent = new ChangePageEvent();
+            pageEvent.pageName = "TestQuiz";
+            this.eventAggregator.Publish(pageEvent);
         }
     }
 }

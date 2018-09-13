@@ -24,7 +24,7 @@
 
         <TabControl SelectedIndex="{Binding Path=Model.CurrentQuestionType}" Grid.Row="2" BorderThickness="0">
             <TabItem TabIndex="0" Width="0">
-                <TextBox Text="{Binding Path=Model.UserInput}"/>
+                <TextBox Text="{Binding Path=Model.UserInput}" PreviewTextInput="{s:Action NumericalInputFilter}"/>
             </TabItem>
             <TabItem TabIndex="1" Width="0">
                 <Grid Background="DarkGray"/>
@@ -32,7 +32,7 @@
         </TabControl>
 
         <Button Grid.Row="3" HorizontalAlignment="Left" Command="{s:Action PreviousQuestion}">Previous Question</Button>
-        <Button Grid.Row="3" HorizontalAlignment="Right" Command="{s:Action NextQuestion}">Next Question</Button>
-        
+        <Button Grid.Row="3" HorizontalAlignment="Right" Command="{s:Action NextQuestion}" Content="{Binding Path=Model.NextButtonText}"/>
+
     </Grid>
 </UserControl>

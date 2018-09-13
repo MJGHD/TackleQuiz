@@ -9,9 +9,9 @@
              d:DesignHeight="550" d:DesignWidth="900">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Command="{s:Action}" Margin="0,0,0,5" FontSize="24">View Homework</Button>
-            <Button Command="{s:Action}" Margin="0,0,0,5" FontSize="24">View Public Quizzes</Button>
-            <Button Command="{s:Action}" Margin="0,0,0,5" FontSize="24">View Quiz History</Button>
+            <!-- <Button Command="{s:Action}" Margin="0,0,0,5" FontSize="24">View Homework</Button> -->
+            <!--<Button Command="{s:Action}" Margin="0,0,0,5" FontSize="24">View Public Quizzes</Button>-->
+            <!--<Button Command="{s:Action}" Margin="0,0,0,5" FontSize="24">View Quiz History</Button-->
             <Button Command="{s:Action LoadTest}" Margin="0,0,0,5" FontSize="24">Load Test Quiz</Button>
         </StackPanel>
     </Grid>

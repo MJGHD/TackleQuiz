@@ -44,7 +44,14 @@ namespace HandyStuff
 
                 if (response.requestSuccess)
                 {
-                    return response.isTeacher.ToString();
+                    if(response.isTeacher == true)
+                    {
+                        return "TEACHER";
+                    }
+                    else
+                    {
+                        return "STUDENT";
+                    }
                 }
                 else
                 {
