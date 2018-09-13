@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Threading;
 using Tackle.HandyStuff;
+using Stylet;
 
 namespace Tackle.Pages
 {
@@ -12,9 +13,11 @@ namespace Tackle.Pages
         int quizID;
         public QuizScreenModel Model { get; set; }
         DispatcherTimer timer;
+        private IEventAggregator eventAggregator;
 
-        public QuizScreenViewModel(int quizID)
+        public QuizScreenViewModel(int quizID, IEventAggregator eventAggregator)
         {
+            this.eventAggregator = eventAggregator;
             this.quizID = quizID;
             this.Model = new QuizScreenModel();
             SetTimerSettings();

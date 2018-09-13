@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace Tackle.Pages
 {
+    //TODO: Figure out how sessions work for the username
     class LogInViewModel
     {
         //Property containing all of the properties in the LogInModel

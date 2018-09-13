@@ -9,7 +9,11 @@
              d:DesignHeight="550" d:DesignWidth="900">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Command="{s:Action LoadTest}">Load Test Quiz</Button>
+            <Button Command="{s:Action}" Margin="0,0,0,5" FontSize="24">Create Quiz</Button>
+            <Button Command="{s:Action}" Margin="0,0,0,5" FontSize="24">View Draft Quizzes</Button>
+            <Button Command="{s:Action}" Margin="0,0,0,5" FontSize="24">View Public Quizzes</Button>
+            <Button Command="{s:Action}" Margin="0,0,0,5" FontSize="24">Mark Quizzes</Button>
+            <Button Command="{s:Action}" Margin="0,0,0,5" FontSize="24">Manage Classes</Button>
         </StackPanel>
         
     </Grid>
