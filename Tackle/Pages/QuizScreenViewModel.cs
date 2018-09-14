@@ -52,13 +52,17 @@ namespace Tackle.Pages
 
         void SetQuestionType()
         {
-            if (Model.QuestionTypes[Model.CurrentQuestionNumber] == "StringInput" || Model.QuestionTypes[Model.CurrentQuestionNumber] == "IntegerInput")
+            if (Model.QuestionTypes[Model.CurrentQuestionNumber] == "StringInput")
             {
                 Model.CurrentQuestionType = 0;
             }
-            else if (Model.QuestionTypes[Model.CurrentQuestionNumber] == "MultipleChoice")
+            if(Model.QuestionTypes[Model.CurrentQuestionNumber] == "IntegerInput")
             {
                 Model.CurrentQuestionType = 1;
+            }
+            else if (Model.QuestionTypes[Model.CurrentQuestionNumber] == "MultipleChoice")
+            {
+                Model.CurrentQuestionType = 2;
             }
         }
 

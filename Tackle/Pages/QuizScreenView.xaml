@@ -24,11 +24,26 @@
 
         <TabControl SelectedIndex="{Binding Path=Model.CurrentQuestionType}" Grid.Row="2" BorderThickness="0">
             <TabItem TabIndex="0" Width="0">
-                <TextBox Text="{Binding Path=Model.UserInput}" PreviewTextInput="{s:Action NumericalInputFilter}"/>
+                <StackPanel>
+                    <TextBlock>Notepad:</TextBlock>
+                    <TextBox Height="100"/>
+                    <TextBlock>Answer:</TextBlock>
+                    <TextBox Text="{Binding Path=Model.UserInput}" Height="300"/>
+                </StackPanel>
             </TabItem>
             <TabItem TabIndex="1" Width="0">
+                <StackPanel>
+                    <TextBlock>Notepad:</TextBlock>
+                    <TextBox Height="100"/>
+                    <TextBlock>Answer:</TextBlock>
+                    <TextBox Text="{Binding Path=Model.UserInput}" PreviewTextInput="{s:Action NumericalInputFilter}" Height="300"/>
+                </StackPanel>
+                
+            </TabItem>
+            <TabItem TabIndex="2" Width="0">
                 <Grid Background="DarkGray"/>
             </TabItem>
+            
         </TabControl>
 
         <Button Grid.Row="3" HorizontalAlignment="Left" Command="{s:Action PreviousQuestion}">Previous Question</Button>
