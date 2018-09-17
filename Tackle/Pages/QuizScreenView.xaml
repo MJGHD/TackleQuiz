@@ -28,7 +28,7 @@
                     <TextBlock>Notepad:</TextBlock>
                     <TextBox Height="100"/>
                     <TextBlock>Answer:</TextBlock>
-                    <TextBox Text="{Binding Path=Model.UserInput}" Height="300"/>
+                    <TextBox Text="{Binding Path=Model.UserInput, Mode=TwoWay}" Height="300"/>
                 </StackPanel>
             </TabItem>
             <TabItem TabIndex="1" Width="0">
@@ -36,7 +36,7 @@
                     <TextBlock>Notepad:</TextBlock>
                     <TextBox Height="100"/>
                     <TextBlock>Answer:</TextBlock>
-                    <TextBox Text="{Binding Path=Model.UserInput}" PreviewTextInput="{s:Action NumericalInputFilter}" Height="300"/>
+                    <TextBox Text="{Binding Path=Model.UserInput, Mode=TwoWay}" PreviewTextInput="{s:Action NumericalInputFilter}" Height="300"/>
                 </StackPanel>
                 
             </TabItem>

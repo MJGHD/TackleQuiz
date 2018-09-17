@@ -12,7 +12,6 @@ namespace Tackle.Pages
 {
     class QuizScreenViewModel
     {
-        //TODO: Make it so that when a character is added, it calls a function that checks whether it's a number (for the int input)
         int quizID;
         public QuizScreenModel Model { get; set; }
         DispatcherTimer timer;
@@ -25,6 +24,7 @@ namespace Tackle.Pages
             this.Model = new QuizScreenModel();
             SetTimerSettings();
             (Model.Questions,Model.QuestionTypes,Model.Answers,Model.QuizType,Model.TimeLeft) = QuizHandling.OpenQuiz();
+            Model.UserInputs = new string[Model.Questions.Length];
             this.Model.NextButtonText = "Next Question";
             SetFirstQuestion();
             timer.Start();
@@ -66,10 +66,22 @@ namespace Tackle.Pages
             }
         }
 
+        public void SaveCurrentAnswer()
+        {
+            Model.UserInputs[Model.CurrentQuestionNumber] = Model.UserInput;
+        }
+
+        public void SetCurrentAnswer()
+        {
+            Model.UserInput = Model.UserInputs[Model.CurrentQuestionNumber];
+        }
+
         public void NextQuestion()
         {
+            SaveCurrentAnswer();
             Model.CurrentQuestionNumber += 1;
-            if(Model.CurrentQuestionNumber+1 == Model.Questions.Length)
+            SetCurrentAnswer();
+            if (Model.CurrentQuestionNumber+1 == Model.Questions.Length)
             {
                 Model.NextButtonText = "Finish Quiz";
             }
@@ -93,8 +105,10 @@ namespace Tackle.Pages
 
         public void PreviousQuestion()
         {
+            SaveCurrentAnswer();
             Model.NextButtonText = "Next Question";
             Model.CurrentQuestionNumber -= 1;
+            SetCurrentAnswer();
             Model.QuestionNumberDisplay = $"Question {Model.CurrentQuestionNumber + 1}/{Model.Questions.Length}";
             SetQuestionType();
             DisplayQuestion();
