@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Threading;
-using HandyStuff;
 using Stylet;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using Quiz;
+using EventAggr;
 
 namespace Tackle.Pages
 {

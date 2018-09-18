@@ -1,8 +1,9 @@
 ﻿using System.Windows;
-using HandyStuff;
 using System.Windows.Controls;
 using Stylet;
 using System.Diagnostics;
+using Networking;
+using EventAggr;
 
 namespace Tackle.Pages
 {

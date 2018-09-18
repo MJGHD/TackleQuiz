@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HandyStuff
+namespace Networking
 {
     //TODO: Make all of this networking stuff async if needed
     //TODO: Make server response JSON
@@ -16,7 +16,7 @@ namespace HandyStuff
     {
         public string ServerRequest(string source, string[] parameters)
         {
-            IPAddress ServerIP = IPAddress.Parse("192.168.1.133");
+            IPAddress ServerIP = IPAddress.Parse("10.25.131.21");
             TcpClient client = new TcpClient();
 
             //Connects the client to the server and creates a TCP communication stream
