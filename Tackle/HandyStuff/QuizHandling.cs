@@ -64,11 +64,9 @@ namespace Quiz
             return answertypes;
         }
 
-        // Uses the tuple type to return multiple values at once - order is: 
-        // question array, answer array, type of quiz, time allocated
-        //(string[],string[],string,int)
+        // Uses the tuple type to return multiple values at once
 
-        public static (string[], string[], string[], string, int) OpenQuiz()
+        public static (string[], string[], string[], int) OpenQuiz()
         {
             ExtractZip(0);
 
@@ -77,7 +75,8 @@ namespace Quiz
             string[] questionTypes = GetQuestionTypes();
             List<string> answers = new List<string>();
 
-            if (metadata[0] == "Instant")
+            //IF STATEMENT ASKING WHETHER THE QUIZ IS INSTANT OR NOT
+            if (true is true)
             {
                 string[] answersArray = GetAnswers();
                 foreach(string answer in answersArray)
@@ -86,7 +85,7 @@ namespace Quiz
                 }
             }
 
-            return (questions, questionTypes, answers.ToArray<string>(), metadata[0], Int32.Parse(metadata[1]));
+            return (questions, questionTypes, answers.ToArray<string>(),Int32.Parse(metadata[0]));
         }
     }
 }

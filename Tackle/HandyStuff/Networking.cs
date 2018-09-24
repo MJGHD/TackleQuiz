@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using JSON;
 
 namespace Networking
 {
@@ -16,7 +17,7 @@ namespace Networking
     {
         public string ServerRequest(string source, string[] parameters)
         {
-            IPAddress ServerIP = IPAddress.Parse("10.25.131.21");
+            IPAddress ServerIP = IPAddress.Parse("192.168.1.107");
             TcpClient client = new TcpClient();
 
             //Connects the client to the server and creates a TCP communication stream

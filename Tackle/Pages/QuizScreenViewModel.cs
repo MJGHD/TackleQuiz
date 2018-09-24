@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Quiz;
 using EventAggr;
+using System.Windows.Controls;
+using System.Windows;
 
 namespace Tackle.Pages
 {
@@ -24,7 +26,9 @@ namespace Tackle.Pages
             this.quizID = quizID;
             this.Model = new QuizScreenModel();
             SetTimerSettings();
-            (Model.Questions,Model.QuestionTypes,Model.Answers,Model.QuizType,Model.TimeLeft) = QuizHandling.OpenQuiz();
+            (Model.Questions,Model.QuestionTypes,Model.Answers,Model.TimeLeft) = QuizHandling.OpenQuiz();
+            //TEMPORARY NEXT LINE
+            Model.QuizType = "Instant";
             Model.UserInputs = new string[Model.Questions.Length];
             this.Model.NextButtonText = "Next Question";
             SetFirstQuestion();
@@ -145,9 +149,34 @@ namespace Tackle.Pages
 
         void FinishQuiz()
         {
-            ChangePageEvent pageEvent = new ChangePageEvent();
-            pageEvent.pageName = "StudentMainMenu";
-            this.eventAggregator.Publish(pageEvent);
+            if(Model.QuizType == "Instant")
+            {
+                int pointer = 0;
+                int correctAnswers = 0;
+
+                foreach(string answer in Model.Answers)
+                {
+                    //String input or multiple choice
+                    if(Model.CurrentQuestionType == 0 || Model.CurrentQuestionType == 2)
+                    {
+                        if(Model.UserInputs[pointer] == Model.Answers[pointer])
+                        {
+                            correctAnswers += 1;
+                        }
+                    }
+                    //Integer input
+                    else if (Model.CurrentQuestionType == 1)
+                    {
+                        if (Int32.Parse(Model.UserInputs[pointer]) == Int32.Parse(Model.Answers[pointer]))
+                        {
+                            correctAnswers += 1;
+                        }
+                    }
+
+                    pointer += 1;
+                }
+                MessageBox.Show(correctAnswers.ToString());
+            }
         }
     }
 }
