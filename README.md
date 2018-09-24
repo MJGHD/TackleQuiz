@@ -10,5 +10,5 @@ Line by line
 Line 1 - Time allocated
 
 ## KNOWN BUGS
-Not wanting to override files when they haven't been deleted in a quiz
+Not wanting to override files when they haven't been deleted in a quiz <br />
 Not finishing the quiz properly
