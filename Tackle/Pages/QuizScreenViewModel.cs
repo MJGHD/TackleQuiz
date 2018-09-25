@@ -10,6 +10,7 @@ using Quiz;
 using EventAggr;
 using System.Windows.Controls;
 using System.Windows;
+using System.Diagnostics;
 
 namespace Tackle.Pages
 {
@@ -84,28 +85,29 @@ namespace Tackle.Pages
         public void NextQuestion()
         {
             SaveCurrentAnswer();
-            Model.CurrentQuestionNumber += 1;
-            SetCurrentAnswer();
-            if (Model.CurrentQuestionNumber+1 == Model.Questions.Length)
-            {
-                Model.NextButtonText = "Finish Quiz";
-            }
-            else
-            {
-                Model.NextButtonText = "Next Question";
-            }
 
-            if(Model.CurrentQuestionNumber == Model.Questions.Length)
+            //If the quiz has finished
+            if(Model.NextButtonText == "Finish Quiz")
             {
                 FinishQuiz();
             }
             else
             {
+                Model.CurrentQuestionNumber += 1;
+                SetCurrentAnswer();
+                if (Model.CurrentQuestionNumber + 1 == Model.Questions.Length)
+                {
+                    Model.NextButtonText = "Finish Quiz";
+                }
+                else
+                {
+                    Model.NextButtonText = "Next Question";
+                }
+
                 Model.QuestionNumberDisplay = $"Question {Model.CurrentQuestionNumber + 1}/{Model.Questions.Length}";
                 SetQuestionType();
                 DisplayQuestion();
             }
-
         }
 
         public void PreviousQuestion()
@@ -122,6 +124,11 @@ namespace Tackle.Pages
         void DisplayQuestion()
         {
             Model.CurrentQuestion = Model.Questions[Model.CurrentQuestionNumber];
+            if(Model.CurrentQuestionType == 2)
+            {
+                GetMultipleChoices();
+            }
+
             if(Model.QuizType == "Instant")
             {
                 Model.CurrentAnswer = Model.Answers[Model.CurrentQuestionNumber];
@@ -176,7 +183,26 @@ namespace Tackle.Pages
                     pointer += 1;
                 }
                 MessageBox.Show(correctAnswers.ToString());
+
+                ChangePageEvent changePage = new ChangePageEvent();
+                changePage.pageName = "StudentMainMenu";
+                this.eventAggregator.Publish(changePage);
             }
+        }
+
+        void GetMultipleChoices()
+        {
+            List<string> choices = new List<string> { };
+
+            //Gets the indexes of the beginning and end of the choices
+            int choiceStart = Model.CurrentQuestion.IndexOf('{');
+            int choiceEnd = Model.CurrentQuestion.IndexOf('}');
+
+            //Removes the start and end of the end of the choices and then adds the choices to the options array
+            string choiceString = Model.CurrentQuestion.Remove(0, choiceStart+1);
+            choiceString = choiceString.TrimEnd('}');
+
+            Model.MultipleChoiceOptions = choiceString.Split(',');
         }
     }
 }

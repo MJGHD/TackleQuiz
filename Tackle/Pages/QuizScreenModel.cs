@@ -23,6 +23,7 @@ namespace Tackle.Pages
         private string _userInput;
         private string[] _userInputs;
         private string _nextButtonText;
+        private string[] multipleChoiceOptions;
 
         public string[] Questions
         {
@@ -108,5 +109,10 @@ namespace Tackle.Pages
             set { SetAndNotify(ref this._nextButtonText, value); }
         }
 
+        public string[] MultipleChoiceOptions
+        {
+            get { return this.multipleChoiceOptions; }
+            set {SetAndNotify(ref this.multipleChoiceOptions,value); }
+        }
     }
 }
