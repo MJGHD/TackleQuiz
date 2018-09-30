@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="ViewModels:">
+    <Position X="1.284" Y="3.393" Height="0.378" Width="1.039" />
+  </Comment>
+  <Comment CommentText="Non-ViewModel classes">
+    <Position X="1.272" Y="7.294" Height="0.667" Width="1.039" />
+  </Comment>
+  <Class Name="Tackle.Pages.LogInViewModel">
+    <Position X="2.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAgBAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Pages\LogInViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tackle.Pages.QuizScreenViewModel">
+    <Position X="4.25" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BgQAAAAQASAAAAAIAACkAAAAABAAAAgAAQgAICAAAAA=</HashCode>
+      <FileName>Pages\QuizScreenViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tackle.Pages.ShellViewModel">
+    <Position X="6.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAQAAAAAAAAA=</HashCode>
+      <FileName>Pages\ShellViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Tackle.Pages.StudentMainMenuViewModel">
+    <Position X="8.5" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Pages\StudentMainMenuViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tackle.Pages.TeacherMainMenuViewModel">
+    <Position X="11" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Pages\TeacherMainMenuViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EventAggr.ChangePageEvent">
+    <Position X="2.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HandyStuff\ChangePageEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JSON.ServerRequest">
+    <Position X="4.25" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAEAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HandyStuff\JSONSerialisation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Networking.ServerConnection">
+    <Position X="8" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>HandyStuff\Networking.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Networking.LogInResponse">
+    <Position X="6.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HandyStuff\Networking.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quiz.QuizHandling">
+    <Position X="9.75" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAEBAAAAgQBAAAAAAAAA=</HashCode>
+      <FileName>HandyStuff\QuizHandling.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
