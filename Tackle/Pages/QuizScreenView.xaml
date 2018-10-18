@@ -28,8 +28,8 @@
                 <StackPanel>
                     <TextBlock>Notepad:</TextBlock>
                     <TextBox Height="100"/>
-                    <TextBlock>Answer:</TextBlock>
-                    <TextBox Text="{Binding Path=Model.UserInput, Mode=TwoWay}" Height="300"/>
+                    <TextBlock Text="{Binding Path=Model.UserInput.Length, StringFormat='Answer: ({0}/5 characters)'}"/>
+                    <TextBox Text="{Binding Path=Model.UserInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Height="300"/>
                 </StackPanel>
             </TabItem>
             <!-- Integer input -->

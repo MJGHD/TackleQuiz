@@ -20,6 +20,8 @@ namespace Tackle.Pages
             Details = new LogInModel();
             Details.ButtonClickable = "True";
             this.eventAggregator = eventAggregator;
+            //DELETE
+            Details.Username = "teststudent";
         }
 
         public void SignUpSubmit(object passwordBoxParameter)

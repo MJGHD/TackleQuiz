@@ -19,13 +19,15 @@
         <TextBlock Grid.Row="1" FontSize="20" Margin="0,0,0,25" HorizontalAlignment="Center">
             Welcome to Tackle! Please sign up or log in below
         </TextBlock>
+
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,30,0,0" Foreground="Red">Username and password limited to 40 characters</TextBlock>
         
         <StackPanel Width="250" Grid.Row="2">
             <TextBlock>Username:</TextBlock>
-            <TextBox Margin="0,5,0,5" Text="{Binding Path=Details.Username}"/>
+            <TextBox Margin="0,5,0,5" Text="{Binding Path=Details.Username}" MaxLength="40"/>
 
             <TextBlock>Password:</TextBlock>
-            <PasswordBox Name="passwordBox"/>
+            <PasswordBox Name="passwordBox" MaxLength="40"/>
             <!--<TextBox Margin="0,5,0,5" Text="{Binding Path=Details.UnencryptedPassword}"/>-->
 
             <StackPanel HorizontalAlignment="Center" Background="LightGray" Margin="0,5,0,5">
@@ -34,7 +36,7 @@
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Margin="0,0,10,0" Command="{s:Action LogInSubmit}" CommandParameter="{Binding ElementName=passwordBox, Mode=OneWay}" IsEnabled="{Binding Path=Details.ButtonClickable}">Log In</Button>
+                <Button Margin="0,0,10,0" Command="{s:Action LogInSubmit}" CommandParameter="{Binding ElementName=passwordBox, Mode=OneWay}" IsEnabled="{Binding Path=Details.ButtonClickable}" IsDefault="True">Log In</Button>
                 <Button Command="{s:Action SignUpSubmit}" IsEnabled="{Binding Path=Details.ButtonClickable}" CommandParameter="{Binding ElementName=passwordBox, Mode=OneWay}" >Sign Up</Button>
             </StackPanel>
         </StackPanel>
