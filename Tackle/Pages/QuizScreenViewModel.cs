@@ -143,11 +143,13 @@ namespace Tackle.Pages
             DisplayQuestion();
         }
 
+        //Checks whether the user input on an integer input question is an integer - if false, the TextBox will reject the input
         public void NumericalInputFilter(Object sender, TextCompositionEventArgs e)
         {
             e.Handled = IsNumber(e.Text);
         }
 
+        //Checks whether the user's input is a number from 0 to 9
         bool IsNumber(string userInput)
         {
             Regex reg = new Regex("[^0-9]");
@@ -190,6 +192,7 @@ namespace Tackle.Pages
             }
         }
 
+        //Gets the multiple choice options from the questions
         void GetMultipleChoices()
         {
             List<string> choices = new List<string> { };
