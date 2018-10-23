@@ -20,6 +20,8 @@ namespace Tackle.Pages
             Details = new LogInModel();
             Details.ButtonClickable = "True";
             this.eventAggregator = eventAggregator;
+            //DELETE
+            Details.Username = "teststudent";
         }
 
         public void SignUpSubmit(object passwordBoxParameter)
@@ -49,7 +51,7 @@ namespace Tackle.Pages
             }
             else
             {
-                MessageBox.Show("Sign up unsuccessful. Check internet connection or try a different username");
+                MessageBox.Show("Sign up/log in unsuccessful. Please make sure that your credentials are correct, or try a different username");
                 Details.ButtonClickable = "True";
             }
 
