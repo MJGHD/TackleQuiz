@@ -7,7 +7,7 @@ using EventAggr;
 
 namespace Tackle.Pages
 {
-    //TODO: Figure out how sessions work for the username
+    //TODO: Figure out how sessions work for the username (maybe have something in the ShellViewModel that can be passed to the submit page?)
     class LogInViewModel
     {
         //Property containing all of the properties in the LogInModel
@@ -20,8 +20,6 @@ namespace Tackle.Pages
             Details = new LogInModel();
             Details.ButtonClickable = "True";
             this.eventAggregator = eventAggregator;
-            //DELETE
-            Details.Username = "teststudent";
         }
 
         public void SignUpSubmit(object passwordBoxParameter)
@@ -90,6 +88,13 @@ namespace Tackle.Pages
             }
 
 
+        }
+
+        public void DevStuff()
+        {
+            ChangePageEvent changePage = new ChangePageEvent();
+            changePage.pageName = "TestQuiz";
+            this.eventAggregator.Publish(changePage);
         }
     }
 }

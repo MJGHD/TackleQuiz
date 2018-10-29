@@ -11,8 +11,6 @@ using JSON;
 
 namespace Networking
 {
-    //TODO: Make all of this networking stuff async if needed
-    //TODO: Make server response JSON
     class ServerConnection
     {
         public string ServerRequest(string source, string[] parameters)

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Results;
 
 namespace EventAggr
 {
     public class ChangePageEvent
     {
         public string pageName;
-        int quizID;
+        public int quizID;
+        //Only used to pass the results from the Quiz page to the Quiz submit page
+        public QuizResults results;
     }
 }

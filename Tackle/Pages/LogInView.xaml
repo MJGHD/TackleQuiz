@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <TextBlock Grid.Row="1" FontSize="20" Margin="0,0,0,25" HorizontalAlignment="Center">
+        <TextBlock Grid.Row="1" FontSize="20" Margin="0,0,0,25" HorizontalAlignment="Center" MouseLeftButtonUp="{s:Action DevStuff}">
             Welcome to Tackle! Please sign up or log in below
         </TextBlock>
 
