@@ -75,8 +75,8 @@ namespace Quiz
             string[] questionTypes = GetQuestionTypes();
             List<string> answers = new List<string>();
 
-            //IF STATEMENT ASKING WHETHER THE QUIZ IS INSTANT OR NOT
-            if (true is true)
+            //If the quiz type is instant, then the answers will need to be fetched from the answers.txt file
+            if (metadata[1] == "INSTANT")
             {
                 string[] answersArray = GetAnswers();
                 foreach(string answer in answersArray)
@@ -84,7 +84,7 @@ namespace Quiz
                     answers.Add(answer);
                 }
             }
-
+            //TODO: ADD ABILITY FOR NON INSTANT QUIZZES AS WELL, RETURN THE QUIZ TYPE
             return (questions, questionTypes, answers.ToArray<string>(),Int32.Parse(metadata[0]));
         }
     }

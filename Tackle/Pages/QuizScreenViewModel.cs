@@ -11,6 +11,7 @@ using EventAggr;
 using System.Windows.Controls;
 using System.Windows;
 using System.Diagnostics;
+using Results;
 
 namespace Tackle.Pages
 {
@@ -158,41 +159,51 @@ namespace Tackle.Pages
 
         void FinishQuiz()
         {
+            //TODO: DONT HARDCODE VALUES
+            QuizResults results = new QuizResults(0,"teststudent",Model.QuizType,Model.Questions,Model.UserInputs);
+            
+            //Adds the correct answers together and makes the "correct" list for easier displaying for teachers
             if(Model.QuizType == "Instant")
             {
                 int pointer = 0;
-                int correctAnswers = 0;
 
                 foreach(string answer in Model.Answers)
                 {
                     //String input or multiple choice
                     if(Model.CurrentQuestionType == 0 || Model.CurrentQuestionType == 2)
                     {
+                        //If it's correct
                         if(Model.UserInputs[pointer] == Model.Answers[pointer])
                         {
-                            correctAnswers += 1;
+                            results.correctTotal += 1;
+                            results.correct.Add(true);
+                        }
+                        else
+                        {
+                            results.correct.Add(false);
                         }
                     }
                     //Integer input
                     else if (Model.CurrentQuestionType == 1)
                     {
+                        //If it's correct
                         if (Int32.Parse(Model.UserInputs[pointer]) == Int32.Parse(Model.Answers[pointer]))
                         {
-                            correctAnswers += 1;
+                            results.correctTotal += 1;
+                            results.correct.Add(true);
+                        }
+                        else
+                        {
+                            results.correct.Add(false);
                         }
                     }
 
                     pointer += 1;
                 }
-                MessageBox.Show(correctAnswers.ToString());
-
-                ChangePageEvent changePage = new ChangePageEvent();
-                changePage.pageName = "StudentMainMenu";
-                this.eventAggregator.Publish(changePage);
             }
         }
 
-        //Gets the multiple choice options from the questions
+        //Gets the multiple choice options from the questions and formats the question without having the choices in it
         void GetMultipleChoices()
         {
             List<string> choices = new List<string> { };
@@ -206,6 +217,10 @@ namespace Tackle.Pages
             choiceString = choiceString.TrimEnd('}');
 
             Model.MultipleChoiceOptions = choiceString.Split(',');
+
+            //Removes the choices from the question for displaying
+            int removeCount = (choiceEnd - choiceStart)+1;
+            Model.CurrentQuestion = Model.CurrentQuestion.Remove(choiceStart, removeCount);
         }
     }
 }

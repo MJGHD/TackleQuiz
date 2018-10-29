@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Tackle.Pages.QuizSubmitView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:local="clr-namespace:Tackle.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="800">
+    <Grid>
+        <TabControl SelectedItem="Model.TabNumber">
+            <!-- Instant quiz -->
+            <TabItem TabIndex="0" Width="0">
+                <Grid>
+                    <!-- Score display -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock FontSize="45">Your score:</TextBlock>
+                        <TextBlock FontSize="45">22</TextBlock>
+                        <TextBlock FontSize="45">/</TextBlock>
+                        <TextBlock FontSize="45">25</TextBlock>
+                    </StackPanel>
+                    <!-- Leaderboard -->
+                    <ListView>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Users}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+
+            </TabItem>
+            <!-- Non-instant quiz -->
+            <TabItem TabIndex="1" Width="0">
+                
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
