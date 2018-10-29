@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\myles\Documents\GitHub\TackleQuiz\Tackle\obj\Debug\
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\
 Tackle
 none
 false
 DEBUG;TRACE
-C:\Users\myles\Documents\GitHub\TackleQuiz\Tackle\App.xaml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\App.xaml
 61887159212
 
 20-171859825
-192034953979
+19-232627446
 Pages\LogInView.xaml;Pages\QuizScreenView.xaml;Pages\QuizSubmitView.xaml;Pages\ShellView.xaml;Pages\StudentMainMenuView.xaml;Pages\TeacherMainMenuView.xaml;
 
 False

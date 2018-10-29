@@ -14,6 +14,7 @@ namespace Tackle.Pages
         private string[] _questionTypes;
         private string[] _answers;
         private string _quizType;
+        private int _quizID;
         private int _timeLeft;
         private string _timeLeftDisplay;
         private int _currentQuestionNumber;
@@ -48,6 +49,12 @@ namespace Tackle.Pages
         {
             get { return this._quizType; }
             set { SetAndNotify(ref this._quizType, value); }
+        }
+
+        public int QuizID
+        {
+            get { return this._quizID; }
+            set { SetAndNotify(ref this._quizID, value); }
         }
 
         public int TimeLeft

@@ -14,7 +14,7 @@ namespace JSON
             return json;
         }
 
-        public string SerialiseResults(QuizResults results)
+        public string Serialise(QuizResults results)
         {
             string json = JsonConvert.SerializeObject(results, Formatting.Indented);
             return json;

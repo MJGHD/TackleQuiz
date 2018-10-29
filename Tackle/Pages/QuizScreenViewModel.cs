@@ -26,8 +26,9 @@ namespace Tackle.Pages
             this.Model = new QuizScreenModel();
             SetTimerSettings();
             (Model.Questions,Model.QuestionTypes,Model.Answers,Model.TimeLeft) = QuizHandling.OpenQuiz();
-            //TEMPORARY NEXT LINE
+            //TEMPORARY NEXT 2 LINES
             Model.QuizType = "Instant";
+            Model.QuizID = quizID;
             Model.UserInputs = new string[Model.Questions.Length];
             this.Model.NextButtonText = "Next Question";
             SetFirstQuestion();
@@ -166,11 +167,11 @@ namespace Tackle.Pages
 
             //Converts the results object into JSON
             ServerRequest request = new ServerRequest();
-            string resultsJSON = request.SerialiseResults(results);
+            string resultsJSON = request.Serialise(results);
 
             //Creates a server connection to submit the quiz results
             ServerConnection server = new ServerConnection();
-            server.ServerRequest("QuizSubmit",new string[1] { resultsJSON });
+            server.ServerRequest("SUBMITRESULTS",new string[3] { Model.QuizID.ToString(), "teststudent", resultsJSON });
 
             //Go to the quiz submit screen and pass the QuizResults object
             SubmitPage(results);

@@ -127,3 +127,5 @@ C:\Users\myles\Documents\GitHub\TackleQuiz\Tackle\obj\Debug\Tackle.exe
 C:\Users\myles\Documents\GitHub\TackleQuiz\Tackle\obj\Debug\Tackle.pdb
 C:\Users\myles\Documents\GitHub\TackleQuiz\Tackle\obj\Debug\Pages\QuizSubmitView.g.cs
 C:\Users\myles\Documents\GitHub\TackleQuiz\Tackle\obj\Debug\Pages\QuizSubmitView.baml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\QuizSubmitView.g.cs
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\QuizSubmitView.baml
