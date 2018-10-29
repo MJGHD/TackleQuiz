@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Threading;
 using Stylet;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Quiz;
 using EventAggr;
-using System.Windows.Controls;
-using System.Windows;
-using System.Diagnostics;
 using Results;
+using Networking;
+using JSON;
 
 namespace Tackle.Pages
 {
@@ -161,46 +158,22 @@ namespace Tackle.Pages
         {
             //TODO: DONT HARDCODE VALUES
             QuizResults results = new QuizResults(0,"teststudent",Model.QuizType,Model.Questions,Model.UserInputs);
-            
-            //Adds the correct answers together and makes the "correct" list for easier displaying for teachers
-            if(Model.QuizType == "Instant")
+
+            if (Model.QuizType == "Instant")
             {
-                int pointer = 0;
-
-                foreach(string answer in Model.Answers)
-                {
-                    //String input or multiple choice
-                    if(Model.CurrentQuestionType == 0 || Model.CurrentQuestionType == 2)
-                    {
-                        //If it's correct
-                        if(Model.UserInputs[pointer] == Model.Answers[pointer])
-                        {
-                            results.correctTotal += 1;
-                            results.correct.Add(true);
-                        }
-                        else
-                        {
-                            results.correct.Add(false);
-                        }
-                    }
-                    //Integer input
-                    else if (Model.CurrentQuestionType == 1)
-                    {
-                        //If it's correct
-                        if (Int32.Parse(Model.UserInputs[pointer]) == Int32.Parse(Model.Answers[pointer]))
-                        {
-                            results.correctTotal += 1;
-                            results.correct.Add(true);
-                        }
-                        else
-                        {
-                            results.correct.Add(false);
-                        }
-                    }
-
-                    pointer += 1;
-                }
+                AddInstantQuizValues(results);
             }
+
+            //Converts the results object into JSON
+            ServerRequest request = new ServerRequest();
+            string resultsJSON = request.SerialiseResults(results);
+
+            //Creates a server connection to submit the quiz results
+            ServerConnection server = new ServerConnection();
+            server.ServerRequest("QuizSubmit",new string[1] { resultsJSON });
+
+            //Go to the quiz submit screen and pass the QuizResults object
+            SubmitPage(results);
         }
 
         //Gets the multiple choice options from the questions and formats the question without having the choices in it
@@ -221,6 +194,56 @@ namespace Tackle.Pages
             //Removes the choices from the question for displaying
             int removeCount = (choiceEnd - choiceStart)+1;
             Model.CurrentQuestion = Model.CurrentQuestion.Remove(choiceStart, removeCount);
+        }
+
+        void SubmitPage(QuizResults results)
+        {
+            ChangePageEvent changePage = new ChangePageEvent();
+            changePage.pageName = "QuizSubmit";
+            changePage.results = results;
+            this.eventAggregator.Publish(changePage);
+        }
+
+        QuizResults AddInstantQuizValues(QuizResults results)
+        {
+            int pointer = 0;
+
+            //Adds the correct answers together and makes the "correct" list for easier displaying for teachers
+            foreach (string answer in Model.Answers)
+            {
+                //String input or multiple choice
+                if (Model.CurrentQuestionType == 0 || Model.CurrentQuestionType == 2)
+                {
+                    //If it's correct
+                    if (Model.UserInputs[pointer] == Model.Answers[pointer])
+                    {
+                        results.correctTotal += 1;
+                        results.correct.Add(true);
+                    }
+                    else
+                    {
+                        results.correct.Add(false);
+                    }
+                }
+                //Integer input
+                else if (Model.CurrentQuestionType == 1)
+                {
+                    //If it's correct
+                    if (Int32.Parse(Model.UserInputs[pointer]) == Int32.Parse(Model.Answers[pointer]))
+                    {
+                        results.correctTotal += 1;
+                        results.correct.Add(true);
+                    }
+                    else
+                    {
+                        results.correct.Add(false);
+                    }
+
+                }
+
+                pointer += 1;
+            }
+            return results;
         }
     }
 }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Results;
 
 namespace JSON
 {
@@ -15,6 +11,12 @@ namespace JSON
         public string Serialise(ServerRequest request)
         {
             string json = JsonConvert.SerializeObject(request, Formatting.Indented);
+            return json;
+        }
+
+        public string SerialiseResults(QuizResults results)
+        {
+            string json = JsonConvert.SerializeObject(results, Formatting.Indented);
             return json;
         }
     }

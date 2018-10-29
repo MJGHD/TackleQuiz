@@ -26,6 +26,9 @@ namespace Results
             this.quizType = quizType;
             this.questions = questions;
             this.answers = answers;
+
+            //Makes the "correct" list not null so it can be interacted with
+            this.correct = new List<bool>();
         }
     }
 }

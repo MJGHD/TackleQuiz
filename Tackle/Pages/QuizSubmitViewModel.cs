@@ -1,12 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EventAggr;
+using Results;
+using Stylet;
 
 namespace Tackle.Pages
 {
     class QuizSubmitViewModel
     {
+        private IEventAggregator eventAggregator;
+        QuizResults results;
+
+        public QuizSubmitViewModel(IEventAggregator eventAggregator, QuizResults results)
+        {
+            this.eventAggregator = eventAggregator;
+            this.results = results;
+        }
     }
 }
