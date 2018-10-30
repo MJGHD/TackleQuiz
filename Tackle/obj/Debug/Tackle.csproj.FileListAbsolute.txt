@@ -129,3 +129,5 @@ C:\Users\myles\Documents\GitHub\TackleQuiz\Tackle\obj\Debug\Pages\QuizSubmitView
 C:\Users\myles\Documents\GitHub\TackleQuiz\Tackle\obj\Debug\Pages\QuizSubmitView.baml
 C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\QuizSubmitView.g.cs
 C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\QuizSubmitView.baml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\JoinClassView.g.cs
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\JoinClassView.baml

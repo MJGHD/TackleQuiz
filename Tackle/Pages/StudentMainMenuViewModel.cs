@@ -17,10 +17,10 @@ namespace Tackle.Pages
             this.eventAggregator = eventAggregator;
         }
 
-        public void LoadTest()
+        public void JoinClass()
         {
             ChangePageEvent pageEvent = new ChangePageEvent();
-            pageEvent.pageName = "TestQuiz";
+            pageEvent.pageName = "JoinClass";
             this.eventAggregator.Publish(pageEvent);
         }
     }

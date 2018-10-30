@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\App.xaml
-61887159212
+71997226272
 
-20-171859825
+23-2085045549
 19-232627446
-Pages\LogInView.xaml;Pages\QuizScreenView.xaml;Pages\QuizSubmitView.xaml;Pages\ShellView.xaml;Pages\StudentMainMenuView.xaml;Pages\TeacherMainMenuView.xaml;
+Pages\JoinClassView.xaml;Pages\LogInView.xaml;Pages\QuizScreenView.xaml;Pages\QuizSubmitView.xaml;Pages\ShellView.xaml;Pages\StudentMainMenuView.xaml;Pages\TeacherMainMenuView.xaml;
 
 False
 
