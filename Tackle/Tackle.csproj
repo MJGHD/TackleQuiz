@@ -83,6 +83,7 @@
     <Compile Include="HandyStuff\Networking.cs" />
     <Compile Include="HandyStuff\QuizHandling.cs" />
     <Compile Include="HandyStuff\QuizResults.cs" />
+    <Compile Include="HandyStuff\UsernameEvent.cs" />
     <Compile Include="Pages\JoinClassModel.cs" />
     <Compile Include="Pages\JoinClassView.xaml.cs">
       <DependentUpon>JoinClassView.xaml</DependentUpon>

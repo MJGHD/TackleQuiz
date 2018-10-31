@@ -4,6 +4,7 @@ using Stylet;
 using System.Diagnostics;
 using Networking;
 using EventAggr;
+using Username;
 
 namespace Tackle.Pages
 {
@@ -37,6 +38,7 @@ namespace Tackle.Pages
             if (signUpRequest != "FAILED")
             {
                 ChangePageEvent pageEvent = new ChangePageEvent();
+                
                 if(signUpRequest == "True")
                 {
                     pageEvent.pageName = "TeacherMainMenu";
@@ -45,6 +47,11 @@ namespace Tackle.Pages
                 {
                     pageEvent.pageName = "StudentMainMenu";
                 }
+
+                UsernameEvent usernameEvent = new UsernameEvent();
+                usernameEvent.username = Details.Username;
+
+                this.eventAggregator.Publish(usernameEvent);
                 this.eventAggregator.Publish(pageEvent);
             }
             else
@@ -79,6 +86,11 @@ namespace Tackle.Pages
                 {
                     pageEvent.pageName = "TeacherMainMenu";
                 }
+
+                UsernameEvent usernameEvent = new UsernameEvent();
+                usernameEvent.username = Details.Username;
+
+                this.eventAggregator.Publish(usernameEvent);
                 this.eventAggregator.Publish(pageEvent);
             }
             else
