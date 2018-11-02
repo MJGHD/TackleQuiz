@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using EventAggr;
 using System.Diagnostics;
 using Networking;
+using System.Windows;
 
 namespace Tackle.Pages
 {
@@ -25,7 +26,22 @@ namespace Tackle.Pages
         public void SubmitClass()
         {
             ServerConnection server = new ServerConnection();
-            server.ServerRequest("JOINCLASS", new string[2] { model.Username, model.ClassID.ToString() });
+            string joinClassAttempt = server.ServerRequest("JOINCLASS", new string[2] { model.Username, model.ClassID.ToString() });
+            //Prevents null characters from being at the end of the string, making it easier to handle
+            joinClassAttempt = joinClassAttempt.Replace("\0", string.Empty);
+
+            if (joinClassAttempt == "success")
+            {
+                MessageBox.Show($"Successfully joined the class {model.ClassID}");
+
+                ChangePageEvent changePage = new ChangePageEvent();
+                changePage.pageName = "StudentMainMenu";
+                this.eventAggregator.Publish(changePage);
+            }
+            else
+            {
+                MessageBox.Show($"Joining of {model.ClassID} unsuccessful. You may have entered the wrong ID or may already be in this class");
+            }
         }
     }
 }

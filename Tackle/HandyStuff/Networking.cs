@@ -15,7 +15,7 @@ namespace Networking
     {
         public string ServerRequest(string source, string[] parameters)
         {
-            IPAddress ServerIP = IPAddress.Parse("10.25.130.169");
+            IPAddress ServerIP = IPAddress.Parse("172.20.10.4");
             TcpClient client = new TcpClient();
 
             //Connects the client to the server and creates a TCP communication stream
@@ -57,9 +57,18 @@ namespace Networking
                     return "FAILED";
                 }
             }
+            else if(serialisation.requestSource == "JOINCLASS")
+            {
+                byte[] readBuffer = new byte[64];
+
+                stream.Read(readBuffer, 0, readBuffer.Length);
+                string messageFromServer = Encoding.Default.GetString(readBuffer);
+
+                return messageFromServer;
+            }
             else
             {
-                return "asdf";
+                return "placeholder";
             }
         }
     }
