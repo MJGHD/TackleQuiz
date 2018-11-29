@@ -80,27 +80,24 @@
     <Compile Include="HandyStuff\JSONSerialisation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandyStuff\MarkQuizEvent.cs" />
     <Compile Include="HandyStuff\Networking.cs" />
     <Compile Include="HandyStuff\QuizHandling.cs" />
     <Compile Include="HandyStuff\QuizResults.cs" />
     <Compile Include="HandyStuff\UsernameEvent.cs" />
     <Compile Include="Pages\JoinClassModel.cs" />
-    <Compile Include="Pages\JoinClassView.xaml.cs">
-      <DependentUpon>JoinClassView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\JoinClassViewModel.cs" />
     <Compile Include="Pages\LogInModel.cs" />
     <Compile Include="Pages\LogInViewModel.cs" />
     <Compile Include="Pages\QuizScreenModel.cs" />
     <Compile Include="Pages\QuizScreenViewModel.cs" />
     <Compile Include="Pages\QuizSubmitModel.cs" />
-    <Compile Include="Pages\QuizSubmitView.xaml.cs">
-      <DependentUpon>QuizSubmitView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\QuizSubmitViewModel.cs" />
     <Compile Include="Pages\ShellViewModel.cs" />
     <Compile Include="Pages\StudentMainMenuViewModel.cs" />
     <Compile Include="Pages\TeacherMainMenuViewModel.cs" />
+    <Compile Include="Pages\ViewQuizModel.cs" />
+    <Compile Include="Pages\ViewQuizViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -153,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TeacherMainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ViewQuizView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

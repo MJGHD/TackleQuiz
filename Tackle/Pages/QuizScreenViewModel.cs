@@ -24,8 +24,9 @@ namespace Tackle.Pages
             this.eventAggregator = eventAggregator;
             this.quizID = quizID;
             this.Model = new QuizScreenModel();
+
             SetTimerSettings();
-            (Model.Questions,Model.QuestionTypes,Model.Answers,Model.TimeLeft) = QuizHandling.OpenQuiz();
+            (Model.Questions, Model.QuestionTypes, Model.Answers, Model.TimeLeft) = QuizHandling.OpenQuiz();
             //TEMPORARY NEXT 2 LINES
             Model.QuizType = "Instant";
             Model.QuizID = quizID;
@@ -134,7 +135,7 @@ namespace Tackle.Pages
             }
         }
 
-        void SetFirstQuestion()
+        public void SetFirstQuestion()
         {
             Model.CurrentQuestionNumber = 0;
             Model.QuestionNumberDisplay = $"Question {Model.CurrentQuestionNumber + 1}/{Model.Questions.Length}";

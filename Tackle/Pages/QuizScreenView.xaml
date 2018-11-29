@@ -26,8 +26,6 @@
             <!-- String input -->
             <TabItem TabIndex="0" Width="0">
                 <StackPanel>
-                    <TextBlock>Notepad:</TextBlock>
-                    <TextBox Height="100"/>
                     <TextBlock Text="{Binding Path=Model.UserInput.Length, StringFormat='Answer: ({0}/5 characters)'}"/>
                     <TextBox Text="{Binding Path=Model.UserInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Height="300"/>
                 </StackPanel>
@@ -35,8 +33,6 @@
             <!-- Integer input -->
             <TabItem TabIndex="1" Width="0">
                 <StackPanel>
-                    <TextBlock>Notepad:</TextBlock>
-                    <TextBox Height="100"/>
                     <TextBlock>Answer:</TextBlock>
                     <TextBox Text="{Binding Path=Model.UserInput, Mode=TwoWay}" PreviewTextInput="{s:Action NumericalInputFilter}" Height="300"/>
                 </StackPanel>
