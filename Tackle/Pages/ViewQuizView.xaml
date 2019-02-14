@@ -17,6 +17,8 @@
             <TextBlock Text="{Binding Path=Model.CurrentQuestion}"/>
             <TextBlock Text="Student's answer:"/>
             <TextBlock Text="{Binding Path=Model.CurrentUserAnswer}"/>
+            <TextBlock Text="Correct?"/>
+            <CheckBox IsChecked="{Binding Path=Model.CurrentQuestionCorrect}"></CheckBox>
         </StackPanel>
 
         <Button Grid.Row="1" HorizontalAlignment="Left" Command="{s:Action PreviousQuestion}">Previous Question</Button>

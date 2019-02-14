@@ -85,6 +85,8 @@
     <Compile Include="HandyStuff\QuizHandling.cs" />
     <Compile Include="HandyStuff\QuizResults.cs" />
     <Compile Include="HandyStuff\UsernameEvent.cs" />
+    <Compile Include="Pages\CreateQuizModel.cs" />
+    <Compile Include="Pages\CreateQuizViewModel.cs" />
     <Compile Include="Pages\JoinClassModel.cs" />
     <Compile Include="Pages\JoinClassViewModel.cs" />
     <Compile Include="Pages\LogInModel.cs" />
@@ -125,6 +127,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Pages\CreateQuizView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\JoinClassView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,6 +163,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

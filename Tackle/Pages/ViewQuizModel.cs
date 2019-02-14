@@ -20,6 +20,7 @@ namespace Tackle.Pages
         private int _currentQuestionNumber;
         private string _currentUserAnswer;
         private bool _currentQuestionCorrect;
+        private string _nextButtonText;
 
         public string[] Questions
         {
@@ -71,5 +72,11 @@ namespace Tackle.Pages
             get { return this._answers; }
             set { SetAndNotify(ref this._answers,value); }
         }
+        public string NextButtonText
+        {
+            get { return _nextButtonText; }
+            set { SetAndNotify(ref this._nextButtonText, value); }
+        }
+
     }
 }

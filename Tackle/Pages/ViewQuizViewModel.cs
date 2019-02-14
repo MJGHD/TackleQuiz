@@ -7,6 +7,7 @@ using Quiz;
 using Stylet;
 using System.Windows;
 using EventAggr;
+using System.Diagnostics;
 
 namespace Tackle.Pages
 {
@@ -38,12 +39,57 @@ namespace Tackle.Pages
                 SetUpQuestion();
             }
         }
-        
+
+        public void PreviousQuestion()
+        {
+            this.Model.CurrentQuestionNumber -= 1;
+
+            if (this.Model.CurrentQuestionNumber.Equals(-1))
+            {
+                this.Model.CurrentQuestionNumber += 1;
+            }
+
+            SetUpQuestion();
+        }
+
+        public void NextQuestion()
+        {
+            this.Model.CorrectQuestions[Model.CurrentQuestionNumber] = this.Model.CurrentQuestionCorrect;
+
+            this.Model.CurrentQuestionNumber += 1;
+
+            if (this.Model.CurrentQuestionNumber == this.Model.Questions.Length)
+            {
+                FinishMarking();
+            }
+            else
+            {
+                SetUpQuestion();
+            }
+        }
+
         void SetUpQuestion()
         {
+            Debug.WriteLine(Model.CurrentQuestionNumber);
+            Debug.WriteLine(Model.Questions.Length-1);
             this.Model.CurrentQuestion = this.Model.Questions[this.Model.CurrentQuestionNumber];
             this.Model.CurrentQuestionCorrect = this.Model.CorrectQuestions[this.Model.CurrentQuestionNumber];
             this.Model.CurrentUserAnswer = this.Model.Answers[this.Model.CurrentQuestionNumber];
+
+            //If it's the final question, display "Finish" instead of "next question"
+            if(Model.CurrentQuestionNumber == Model.Questions.Length-1)
+            {
+                this.Model.NextButtonText = "Finish";
+            }
+            else
+            {
+                this.Model.NextButtonText = "Next Question";
+            }
+        }
+
+        void FinishMarking()
+        {
+            Debug.WriteLine(this.Model.CorrectQuestions[this.Model.CorrectQuestions.Length-1]);
         }
     }
 }

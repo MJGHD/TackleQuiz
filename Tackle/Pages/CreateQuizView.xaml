@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Tackle.Pages.CreateQuizView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:local="clr-namespace:Tackle.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="25"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Rectangle Grid.Row="0" Fill="LightGray" Grid.RowSpan="2"></Rectangle>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Left" FontSize="16" Padding="5,0,0,0" Text="{Binding Path=Model.QuestionNumberDisplay}"/>
+            <ComboBox MaxWidth="100" Padding="300,0,0,0" ItemsSource="{Binding Path=Model.TypesOfQuestion}" SelectedIndex="{Binding Path=Model.CurrentQuestionType}" Text="{Binding Path=Model.CurrentQuestionTypeText}"/>
+            <Image Grid.Row="0" HorizontalAlignment="Right" Source="C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\images\delete.png" MaxHeight="30" MouseLeftButtonUp="{s:Action DeleteQuestion}"/>
+
+            <Rectangle Grid.Row="1" Fill="Aqua"/>
+            <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}"/>
+
+            <TabControl SelectedIndex="{Binding Path=Model.CurrentQuestionType}" Grid.Row="2" BorderThickness="0">
+                <!-- String input -->
+                <TabItem TabIndex="0" Width="0">
+                    <StackPanel>
+                        <TextBlock>Expected answer:</TextBlock>
+                        <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}" Height="300"/>
+                    </StackPanel>
+                </TabItem>
+                <!-- Integer input -->
+                <TabItem TabIndex="1" Width="0">
+                    <StackPanel>
+                        <TextBlock>Expected answer:</TextBlock>
+                        <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}" PreviewTextInput="{s:Action NumericalInputFilter}" Height="300"/>
+                    </StackPanel>
+
+                </TabItem>
+                <!-- Multiple choice -->
+                <TabItem TabIndex="2" Width="0">
+                    <StackPanel>
+                        <TextBlock>Enter each multiple choice option with a comma between each element:</TextBlock>
+                        <TextBox Text="{Binding Path=Model.MultipleChoiceInputs}"/>
+                    </StackPanel>
+                </TabItem>
+
+            </TabControl>
+
+            <Button Grid.Row="3" HorizontalAlignment="Left" Command="{s:Action PreviousQuestion}">Previous Question</Button>
+            <Button Grid.Row="3" HorizontalAlignment="Center" Command="{s:Action FinishQuiz}">Finish Quiz</Button>
+            <Button Grid.Row="3" HorizontalAlignment="Right" Command="{s:Action NextQuestion}" Content="{Binding Path=Model.NextButtonText}"/>
+
+        </Grid>
+    </Grid>
+</UserControl>
