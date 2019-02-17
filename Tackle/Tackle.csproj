@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="HandyStuff\MarkQuizEvent.cs" />
     <Compile Include="HandyStuff\Networking.cs" />
+    <Compile Include="HandyStuff\Quiz.cs" />
     <Compile Include="HandyStuff\QuizHandling.cs" />
     <Compile Include="HandyStuff\QuizResults.cs" />
     <Compile Include="HandyStuff\UsernameEvent.cs" />
@@ -166,6 +167,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

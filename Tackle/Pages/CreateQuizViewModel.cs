@@ -11,8 +11,11 @@ using Stylet;
 using EventAggr;
 using System.IO;
 using System.IO.Compression;
+using Networking;
+using JSON;
+using Quiz;
 
-//TOOO: make it so that multiple choice saves properly, or at all
+//TOOO: make it so that at the end, the multiple choice questions get the options appended to them (in the finish quiz function)
 
 namespace Tackle.Pages
 {
@@ -21,10 +24,13 @@ namespace Tackle.Pages
         public CreateQuizModel Model { get; set; }
         private IEventAggregator eventAggregator;
 
-        public CreateQuizViewModel(IEventAggregator eventAggregator, IWindowManager windowManager)
+        public CreateQuizViewModel(IEventAggregator eventAggregator, string username)
         {
             this.eventAggregator = eventAggregator;
             this.Model = new CreateQuizModel();
+
+            this.Model.Username = username;
+
             this.Model.CurrentQuestionNumber = 0;
             this.Model.NextButtonText = "Add question";
             this.Model.QuestionNumberDisplay = "Question 1/1";
@@ -96,6 +102,17 @@ namespace Tackle.Pages
             
         }
 
+        public void ShowSettings()
+        {
+            this.Model.tempQuestionType = this.Model.CurrentQuestionType;
+            this.Model.CurrentQuestionType = 3;
+        }
+
+        public void QuitSettings()
+        {
+            this.Model.CurrentQuestionType = this.Model.tempQuestionType;
+        }
+
         void SaveQuestion()
         {
             if (this.Model.CurrentQuestionNumber == this.Model.Questions.Count)
@@ -135,72 +152,75 @@ namespace Tackle.Pages
 
         public void FinishQuiz()
         {
-            SaveQuiz();
-            //this.eventAggregator.Publish();
-        }
+            string success = SaveQuiz();
 
-        void SaveQuiz()
-        {
-            Directory.CreateDirectory(string.Format(@"{0}\zip", Environment.CurrentDirectory));
-            SaveQuestions();
-            SaveAnswers();
-            SaveMetadata();
-            SaveQuestionTypes();
-            ZipFiles();
-        }
-
-        void SaveQuestions()
-        {
-            string directory = string.Format(@"{0}\zip\questions.txt", Environment.CurrentDirectory);
-            using (File.Create(directory)) ;
-            File.WriteAllLines(directory, this.Model.Questions.ToArray());
-        }
-
-        void SaveAnswers()
-        {
-            string directory = string.Format(@"{0}\zip\answers.txt", Environment.CurrentDirectory);
-            using (File.Create(directory)) ;
-            File.WriteAllLines(directory, this.Model.Answers.ToArray());
-        }
-
-        void SaveMetadata()
-        {
-            Debug.Write("a");
-        }
-
-        void SaveQuestionTypes()
-        {
-            string directory = string.Format(@"{0}\zip\questiontypes.txt", Environment.CurrentDirectory);
-            using (File.Create(directory)) ;
-
-            //Converting the integer question types to the strings that the file is expecting, e.g. "IntegerInput" instead of 1
-            string[] lines = new string[this.Model.QuestionTypes.Count];
-
-            int counter = 0;
-            foreach(int type in this.Model.QuestionTypes)
+            if(success == "success")
             {
-                switch (type)
+                MessageBox.Show("Quiz submission successful");
+                this.eventAggregator.Publish("TeacherMainMenu");
+            }
+            else
+            {
+                MessageBox.Show("Quiz submission unsuccessful");
+            }
+        }
+
+        string SaveQuiz()
+        {
+            //save last question
+            SaveQuestion();
+
+            //Put the multiple choice options into the question titles, so that they appear when taking the quiz
+            MultiChoiceNormalisation();
+
+            //Creates instance of Quiz class to be serialised into JSON
+            Quiz.Quiz quiz = MakeQuiz();
+
+            //Submit to server
+            string success = Submit(quiz);
+
+            return success;
+        }
+
+        void MultiChoiceNormalisation()
+        {
+            int counter = 0;
+
+            foreach(int questionType in this.Model.QuestionTypes)
+            {
+                //if it's multiple choice
+                if(questionType == 2)
                 {
-                    case 0:
-                        lines[counter] = "StringInput";
-                        break;
-                    case 1:
-                        lines[counter] = "IntegerInput";
-                        break;
-                    case 2:
-                        lines[counter] = "MultipleChoice";
-                        break;
+                    //Add to the end of the question in the normal format of multi choice - {option1,option2}
+                    this.Model.Questions[counter] += " {"+this.Model.Answers[counter]+"}";
                 }
                 counter += 1;
             }
-            File.WriteAllLines(directory, lines);
         }
 
-        void ZipFiles()
+        string Submit(Quiz.Quiz quiz)
         {
-            string startDirectory = String.Format(@"{0}\zip", Environment.CurrentDirectory);
-            string zipDirectory = String.Format(@"{0}\{1}.zip",Environment.CurrentDirectory,this.Model.QuizID);
-            ZipFile.CreateFromDirectory(startDirectory, zipDirectory);
+            ServerRequest serverRequest = new ServerRequest();
+            string quizJSON = serverRequest.Serialise(quiz);
+
+            ServerConnection server = new ServerConnection();
+            string success = server.ServerRequest("CREATEQUIZ", new string[] {this.Model.Username,this.Model.QuizType,this.Model.QuizTitle,quizJSON });
+
+            return success;
+        }
+
+        //Fills up Quiz instance's fields
+        Quiz.Quiz MakeQuiz()
+        {
+            Quiz.Quiz quiz = new Quiz.Quiz();
+
+            quiz.Answers = this.Model.Answers.ToArray();
+            quiz.Questions = this.Model.Questions.ToArray();
+            quiz.QuestionTypes = this.Model.QuestionTypes.ToArray();
+            quiz.TimeAllocated = this.Model.TimeAllocated;
+            quiz.QuizType = this.Model.QuizType;
+
+            return quiz;
         }
     }
 }

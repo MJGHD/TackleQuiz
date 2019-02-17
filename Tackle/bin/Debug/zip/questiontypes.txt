@@ -1,3 +1,0 @@
-StringInput
-IntegerInput
-StringInput

@@ -15,7 +15,7 @@ namespace Networking
     {
         public string ServerRequest(string source, string[] parameters)
         {
-            IPAddress ServerIP = IPAddress.Parse("10.25.131.115");
+            IPAddress ServerIP = IPAddress.Parse("192.168.1.107");
             TcpClient client = new TcpClient();
 
             //Connects the client to the server and creates a TCP communication stream
@@ -72,6 +72,15 @@ namespace Networking
                 Console.WriteLine("read");
                 stream.Read(readBuffer, 0, readBuffer.Length);
                 Console.WriteLine("a");
+                string messageFromServer = Encoding.Default.GetString(readBuffer);
+
+                return messageFromServer;
+            }
+            else if(serialisation.requestSource == "CREATEQUIZ")
+            {
+                byte[] readBuffer = new byte[64];
+
+                stream.Read(readBuffer, 0, readBuffer.Length);
                 string messageFromServer = Encoding.Default.GetString(readBuffer);
 
                 return messageFromServer;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,22 +10,25 @@ namespace Tackle.Pages
 {
     class CreateQuizModel : PropertyChangedBase
     {
+        public int tempQuestionType;
+
         private List<string> _questions;
         private string _quizType;
         private string _username;
         private List<string> _answers;
         private int _quizID;
+        private string _quizTitle;
 
         private string _currentQuestion;
         private string _currentQuestionAnswer;
         private int _currentQuestionNumber;
         private string _questionNumberDisplay;
         private int _currentQuestionType;
-        private string _currentQuestionTypeText;
         private string _nextButtonText;
         private List<int> _questionTypes;
         private string _multipleChoiceInputs;
         private List<string> _allMultipleChoiceInputs;
+        private int _timeAllocated;
 
         public List<string> Questions
         {
@@ -51,6 +55,11 @@ namespace Tackle.Pages
             get { return this._quizID; }
             set { SetAndNotify(ref this._quizID, value); }
         }
+        public string QuizTitle
+        {
+            get { return this._quizTitle; }
+            set { SetAndNotify(ref this._quizTitle, value); }
+        }
         public string CurrentQuestion
         {
             get { return this._currentQuestion; }
@@ -75,25 +84,13 @@ namespace Tackle.Pages
         {
             get { return this._currentQuestionType; }
             set {
+                //If the selected type has CHANGED, clear the current question answer (prevents forcing of text in integer questions)
+                if(this._currentQuestionType != value)
+                {
+                    this.CurrentQuestionAnswer = "";
+                }
                 SetAndNotify(ref this._currentQuestionType, value);
-                //Changes the CurrentQuestionTypeText value
-                switch (CurrentQuestionType) {
-                    case 0:
-                        CurrentQuestionTypeText = "Text";
-                        break;
-                    case 1:
-                        CurrentQuestionTypeText = "Integer";
-                        break;
-                    case 2:
-                        CurrentQuestionTypeText = "Multiple Choice";
-                        break;
-                };
             }
-        }
-        public string CurrentQuestionTypeText
-        {
-            get { return this._currentQuestionTypeText; }
-            set { SetAndNotify(ref this._currentQuestionTypeText, value); }
         }
         public string NextButtonText
         {
@@ -115,8 +112,11 @@ namespace Tackle.Pages
             get { return this._allMultipleChoiceInputs; }
             set { SetAndNotify(ref this._allMultipleChoiceInputs, value); }
         }
-
-        public string[] TypesOfQuestion { get; set; } = new string[3] { "Text", "Integer", "Multiple Choice" };
+        public int TimeAllocated
+        {
+            get { return this._timeAllocated; }
+            set { SetAndNotify(ref this._timeAllocated, value); }
+        }
 
         public CreateQuizModel()
         {

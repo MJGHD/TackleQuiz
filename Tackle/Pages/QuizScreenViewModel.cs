@@ -19,17 +19,14 @@ namespace Tackle.Pages
         DispatcherTimer timer;
         private IEventAggregator eventAggregator;
 
-        public QuizScreenViewModel(int quizID, IEventAggregator eventAggregator)
+        public QuizScreenViewModel(int quizID, string JSON, IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
             this.quizID = quizID;
             this.Model = new QuizScreenModel();
 
             SetTimerSettings();
-            (Model.Questions, Model.QuestionTypes, Model.Answers, Model.TimeLeft) = QuizHandling.OpenQuiz();
-            //TEMPORARY NEXT 2 LINES
-            Model.QuizType = "Instant";
-            Model.QuizID = quizID;
+            (Model.Questions, Model.QuestionTypes, Model.Answers, Model.TimeLeft, Model.QuizType) = QuizHandling.OpenQuiz(JSON);
             Model.UserInputs = new string[Model.Questions.Length];
             this.Model.NextButtonText = "Next Question";
             SetFirstQuestion();
@@ -58,18 +55,7 @@ namespace Tackle.Pages
 
         void SetQuestionType()
         {
-            if (Model.QuestionTypes[Model.CurrentQuestionNumber] == "StringInput")
-            {
-                Model.CurrentQuestionType = 0;
-            }
-            if(Model.QuestionTypes[Model.CurrentQuestionNumber] == "IntegerInput")
-            {
-                Model.CurrentQuestionType = 1;
-            }
-            else if (Model.QuestionTypes[Model.CurrentQuestionNumber] == "MultipleChoice")
-            {
-                Model.CurrentQuestionType = 2;
-            }
+            Model.CurrentQuestionType = Model.QuestionTypes[Model.CurrentQuestionNumber];
         }
 
         public void SaveCurrentAnswer()

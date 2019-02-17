@@ -11,7 +11,7 @@ namespace Tackle.Pages
     class QuizScreenModel : PropertyChangedBase
     {
         private string[] _questions;
-        private string[] _questionTypes;
+        private int[] _questionTypes;
         private string[] _answers;
         private string _quizType;
         private int _quizID;
@@ -33,7 +33,7 @@ namespace Tackle.Pages
             set { SetAndNotify(ref this._questions, value); }
         }
 
-        public string[] QuestionTypes
+        public int[] QuestionTypes
         {
             get { return this._questionTypes; }
             set { SetAndNotify(ref this._questionTypes, value); }

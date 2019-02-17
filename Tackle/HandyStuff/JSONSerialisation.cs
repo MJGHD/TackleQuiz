@@ -19,5 +19,11 @@ namespace JSON
             string json = JsonConvert.SerializeObject(results, Formatting.Indented);
             return json;
         }
+
+        public string Serialise(Quiz.Quiz quiz)
+        {
+            string json = JsonConvert.SerializeObject(quiz, Formatting.Indented);
+            return json;
+        }
     }
 }

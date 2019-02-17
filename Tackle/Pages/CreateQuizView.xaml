@@ -18,16 +18,25 @@
 
             <Rectangle Grid.Row="0" Fill="LightGray" Grid.RowSpan="2"></Rectangle>
             <TextBlock Grid.Row="0" HorizontalAlignment="Left" FontSize="16" Padding="5,0,0,0" Text="{Binding Path=Model.QuestionNumberDisplay}"/>
-            <ComboBox MaxWidth="100" Padding="300,0,0,0" ItemsSource="{Binding Path=Model.TypesOfQuestion}" SelectedIndex="{Binding Path=Model.CurrentQuestionType}" Text="{Binding Path=Model.CurrentQuestionTypeText}"/>
-            <Image Grid.Row="0" HorizontalAlignment="Right" Source="C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\images\delete.png" MaxHeight="30" MouseLeftButtonUp="{s:Action DeleteQuestion}"/>
 
-            <Rectangle Grid.Row="1" Fill="Aqua"/>
-            <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}"/>
+            <ComboBox MaxWidth="100" Padding="300,0,0,0" SelectedIndex="{Binding Path=Model.CurrentQuestionType}">
+                <ComboBoxItem Content="Text"/>
+                <ComboBoxItem Content="Integer"/>
+                <ComboBoxItem Content="Multiple Choice"/>
+            </ComboBox>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
+                <Image Source="C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\images\settings.png" MaxHeight="30" MouseLeftButtonUp="{s:Action ShowSettings}"/>
+                <Image Source="C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\images\delete.png" MaxHeight="30" MouseLeftButtonUp="{s:Action DeleteQuestion}"/>
+            </StackPanel>
+            
 
             <TabControl SelectedIndex="{Binding Path=Model.CurrentQuestionType}" Grid.Row="2" BorderThickness="0">
                 <!-- String input -->
                 <TabItem TabIndex="0" Width="0">
                     <StackPanel>
+                        <TextBlock HorizontalAlignment="Center">Question:</TextBlock>
+                        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}" MinWidth="50"/>
                         <TextBlock>Expected answer:</TextBlock>
                         <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}" Height="300"/>
                     </StackPanel>
@@ -35,7 +44,9 @@
                 <!-- Integer input -->
                 <TabItem TabIndex="1" Width="0">
                     <StackPanel>
-                        <TextBlock>Expected answer:</TextBlock>
+                        <TextBlock HorizontalAlignment="Center">Question:</TextBlock>
+                        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}" MinWidth="50"/>
+                        <TextBlock>Expected answer: (Integers only)</TextBlock>
                         <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}" PreviewTextInput="{s:Action NumericalInputFilter}" Height="300"/>
                     </StackPanel>
 
@@ -43,8 +54,23 @@
                 <!-- Multiple choice -->
                 <TabItem TabIndex="2" Width="0">
                     <StackPanel>
+                        <TextBlock HorizontalAlignment="Center">Question:</TextBlock>
+                        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}" MinWidth="50"/>
                         <TextBlock>Enter each multiple choice option with a comma between each element:</TextBlock>
-                        <TextBox Text="{Binding Path=Model.MultipleChoiceInputs}"/>
+                        <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}"/>
+                    </StackPanel>
+                </TabItem>
+                <!-- Settings -->
+                <TabItem TabIndex="3" Width="0">
+                    <StackPanel>
+                        <TextBlock HorizontalAlignment="Center">Quiz Title:</TextBlock>
+                        <TextBox HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.QuizTitle}" MinWidth="250"/>
+
+                        <RadioButton>
+                            
+                        </RadioButton>
+                        
+                        <Button Command="{s:Action QuitSettings}" Width="100">Close Settings</Button>
                     </StackPanel>
                 </TabItem>
 
