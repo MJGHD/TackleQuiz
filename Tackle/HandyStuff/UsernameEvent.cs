@@ -11,5 +11,6 @@ namespace Username
     public class UsernameEvent
     {
         public string username;
+        public string userType;
     }
 }

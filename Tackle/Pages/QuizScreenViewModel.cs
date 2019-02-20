@@ -19,14 +19,17 @@ namespace Tackle.Pages
         DispatcherTimer timer;
         private IEventAggregator eventAggregator;
 
-        public QuizScreenViewModel(int quizID, string JSON, IEventAggregator eventAggregator)
+        public QuizScreenViewModel(int quizID, IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
             this.quizID = quizID;
             this.Model = new QuizScreenModel();
 
             SetTimerSettings();
+
+            string JSON = QuizHandling.GetQuizJSON(this.quizID);
             (Model.Questions, Model.QuestionTypes, Model.Answers, Model.TimeLeft, Model.QuizType) = QuizHandling.OpenQuiz(JSON);
+
             Model.UserInputs = new string[Model.Questions.Length];
             this.Model.NextButtonText = "Next Question";
             SetFirstQuestion();

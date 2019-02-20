@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Quiz
 {
-    class Quiz
+    public class Quiz
     {
         public string[] Questions;
         public string[] Answers;

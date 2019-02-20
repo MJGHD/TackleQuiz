@@ -62,14 +62,15 @@
                 </TabItem>
                 <!-- Settings -->
                 <TabItem TabIndex="3" Width="0">
-                    <StackPanel>
-                        <TextBlock HorizontalAlignment="Center">Quiz Title:</TextBlock>
-                        <TextBox HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.QuizTitle}" MinWidth="250"/>
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock>Quiz Title:</TextBlock>
+                        <TextBox FontSize="20" Text="{Binding Path=Model.QuizTitle}" MinWidth="250"/>
 
-                        <RadioButton>
-                            
-                        </RadioButton>
-                        
+                        <TextBlock>Time Allocated (in seconds):</TextBlock>
+                        <TextBox FontSize="20" Text="{Binding Path=Model.TimeAllocated}" MinWidth="250" PreviewTextInput="{s:Action NumericalInputFilter}"/>
+
+                        <CheckBox Command="{s:Action InstantChecked}" IsChecked="{Binding Path=Model.Instant}" Content="Instant Quiz"/>
+
                         <Button Command="{s:Action QuitSettings}" Width="100">Close Settings</Button>
                     </StackPanel>
                 </TabItem>

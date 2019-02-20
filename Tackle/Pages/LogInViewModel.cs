@@ -50,6 +50,14 @@ namespace Tackle.Pages
 
                 UsernameEvent usernameEvent = new UsernameEvent();
                 usernameEvent.username = Details.Username;
+                if(signUpRequest == "True")
+                {
+                    usernameEvent.userType = "TEACHER";
+                }
+                else
+                {
+                    usernameEvent.userType = "STUDENT";
+                }
 
                 this.eventAggregator.Publish(usernameEvent);
                 this.eventAggregator.Publish(pageEvent);
@@ -89,6 +97,7 @@ namespace Tackle.Pages
 
                 UsernameEvent usernameEvent = new UsernameEvent();
                 usernameEvent.username = Details.Username;
+                usernameEvent.userType = logInRequest;
 
                 this.eventAggregator.Publish(usernameEvent);
                 this.eventAggregator.Publish(pageEvent);
@@ -100,13 +109,6 @@ namespace Tackle.Pages
             }
 
 
-        }
-
-        public void DevStuff()
-        {
-            ChangePageEvent changePage = new ChangePageEvent();
-            changePage.pageName = "TestQuiz";
-            this.eventAggregator.Publish(changePage);
         }
     }
 }

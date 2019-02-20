@@ -12,6 +12,13 @@ namespace Quiz
 {
     public class QuizHandling
     {
+        public static string GetQuizJSON(int quizID)
+        {
+            ServerConnection server = new ServerConnection();
+            string JSON = server.ServerRequest("OPENQUIZ", new string[] { quizID.ToString() });
+            return JSON;
+        }
+
         // Gets the quiz information for students
 
         public static (string[], int[], string[], int, string) OpenQuiz(string JSON)

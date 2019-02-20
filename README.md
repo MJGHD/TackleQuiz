@@ -9,9 +9,7 @@ Request opening quizzes to the server - return QuizID and QuizContent. QuizConte
 
 ## OBJECTIVES LEFT TO DO
 
-2.	a) If a teacher has logged in, they should be shown a main menu with the options to create a new quiz; open a draft quiz; view the quizzes that they have 
-currently set to their classes as well as their quizzes set history; the quizzes they have yet to mark, view and amend the classes they’ve set up and to view 
-all public quizzes.
+2.
 b) If a student has logged in, then they should be shown a main menu with the options to view currently set quizzes; review their quiz history; request to join 
 a class and to view all public quizzes.
 3.	a) A teacher should be able to create a quiz with as many questions as they’d like, custom timing, whether it’s an instant result quiz or not, different 

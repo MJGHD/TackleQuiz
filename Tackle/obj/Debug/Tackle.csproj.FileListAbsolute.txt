@@ -135,3 +135,5 @@ C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\ViewQuizView.
 C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\ViewQuizView.baml
 C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\CreateQuizView.g.cs
 C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\CreateQuizView.baml
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\QuizListView.g.cs
+C:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\obj\Debug\Pages\QuizListView.baml

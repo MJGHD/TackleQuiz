@@ -85,6 +85,24 @@ namespace Networking
 
                 return messageFromServer;
             }
+            else if (serialisation.requestSource == "QUIZLIST")
+            {
+                byte[] readBuffer = new byte[1000];
+
+                stream.Read(readBuffer, 0, readBuffer.Length);
+                string messageFromServer = Encoding.Default.GetString(readBuffer);
+
+                return messageFromServer;
+            }
+            else if (serialisation.requestSource == "OPENQUIZ")
+            {
+                byte[] readBuffer = new byte[1000];
+
+                stream.Read(readBuffer, 0, readBuffer.Length);
+                string messageFromServer = Encoding.Default.GetString(readBuffer);
+
+                return messageFromServer;
+            }
             else
             {
                 return "placeholder";

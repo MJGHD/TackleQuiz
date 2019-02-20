@@ -92,6 +92,11 @@
     <Compile Include="Pages\JoinClassViewModel.cs" />
     <Compile Include="Pages\LogInModel.cs" />
     <Compile Include="Pages\LogInViewModel.cs" />
+    <Compile Include="Pages\QuizListModel.cs" />
+    <Compile Include="Pages\QuizListView.xaml.cs">
+      <DependentUpon>QuizListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuizListViewModel.cs" />
     <Compile Include="Pages\QuizScreenModel.cs" />
     <Compile Include="Pages\QuizScreenViewModel.cs" />
     <Compile Include="Pages\QuizSubmitModel.cs" />
@@ -137,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\LogInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuizListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

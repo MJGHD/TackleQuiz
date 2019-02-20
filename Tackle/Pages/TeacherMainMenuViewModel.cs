@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EventAggr;
 using Stylet;
 
 namespace Tackle.Pages
@@ -16,9 +17,18 @@ namespace Tackle.Pages
             this.eventAggregator = eventAggregator;
         }
 
-        public void LoadTest()
+        public void CreateQuiz()
         {
+            ChangePageEvent changePage = new ChangePageEvent();
+            changePage.pageName = "CreateQuiz";
+            this.eventAggregator.Publish(changePage);
+        }
 
+        public void ViewPublicQuizzes()
+        {
+            ChangePageEvent changePage = new ChangePageEvent();
+            changePage.pageName = "ViewQuizzes";
+            this.eventAggregator.Publish(changePage);
         }
     }
 }

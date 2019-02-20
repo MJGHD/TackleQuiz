@@ -23,5 +23,12 @@ namespace Tackle.Pages
             pageEvent.pageName = "JoinClass";
             this.eventAggregator.Publish(pageEvent);
         }
+
+        public void ViewQuizzes()
+        {
+            ChangePageEvent pageEvent = new ChangePageEvent();
+            pageEvent.pageName = "ViewQuizzes";
+            this.eventAggregator.Publish(pageEvent);
+        }
     }
 }

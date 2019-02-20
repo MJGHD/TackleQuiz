@@ -29,6 +29,7 @@ namespace Tackle.Pages
         private string _multipleChoiceInputs;
         private List<string> _allMultipleChoiceInputs;
         private int _timeAllocated;
+        private bool _instant;
 
         public List<string> Questions
         {
@@ -84,8 +85,8 @@ namespace Tackle.Pages
         {
             get { return this._currentQuestionType; }
             set {
-                //If the selected type has CHANGED, clear the current question answer (prevents forcing of text in integer questions)
-                if(this._currentQuestionType != value)
+                //If the selected type has CHANGED, clear the current question answer (prevents forcing of text in integer questions, but ignores when settings is closed or opened)
+                if(this._currentQuestionType != value && this._currentQuestionType != 3 && value != 3)
                 {
                     this.CurrentQuestionAnswer = "";
                 }
@@ -116,6 +117,11 @@ namespace Tackle.Pages
         {
             get { return this._timeAllocated; }
             set { SetAndNotify(ref this._timeAllocated, value); }
+        }
+        public bool Instant
+        {
+            get { return this._instant; }
+            set { SetAndNotify(ref this._instant, value); }
         }
 
         public CreateQuizModel()

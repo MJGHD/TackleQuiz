@@ -34,6 +34,9 @@ namespace Tackle.Pages
             this.Model.CurrentQuestionNumber = 0;
             this.Model.NextButtonText = "Add question";
             this.Model.QuestionNumberDisplay = "Question 1/1";
+            this.Model.Instant = true;
+            //start on settings
+            this.Model.CurrentQuestionType = 3;
         }
 
         public void NextQuestion()
@@ -110,11 +113,25 @@ namespace Tackle.Pages
 
         public void QuitSettings()
         {
-            this.Model.CurrentQuestionType = this.Model.tempQuestionType;
+            //checks if the title and time allowed are empty
+            if (this.Model.QuizTitle != "" && this.Model.QuizTitle != null && this.Model.TimeAllocated != 0)
+            {
+                this.Model.CurrentQuestionType = this.Model.tempQuestionType;
+            }
+            else
+            {
+                MessageBox.Show("The title and time allocated must be filled in");
+            }
         }
 
         void SaveQuestion()
         {
+            //checks whether the settings are open or not - if they are, save as the temporary question type
+            if (this.Model.CurrentQuestionType == 3)
+            {
+                this.Model.CurrentQuestionType = this.Model.tempQuestionType;
+            }
+
             if (this.Model.CurrentQuestionNumber == this.Model.Questions.Count)
             {
                 AddQuestion();
@@ -157,6 +174,7 @@ namespace Tackle.Pages
             if(success == "success")
             {
                 MessageBox.Show("Quiz submission successful");
+                TeacherMainMenu();
                 this.eventAggregator.Publish("TeacherMainMenu");
             }
             else
@@ -206,6 +224,9 @@ namespace Tackle.Pages
             ServerConnection server = new ServerConnection();
             string success = server.ServerRequest("CREATEQUIZ", new string[] {this.Model.Username,this.Model.QuizType,this.Model.QuizTitle,quizJSON });
 
+            //Removes UTF-8 encoding's annoying "\0" character for whitespaece
+            success = success.Replace("\0", string.Empty);
+
             return success;
         }
 
@@ -222,5 +243,25 @@ namespace Tackle.Pages
 
             return quiz;
         }
-    }
+
+        void TeacherMainMenu()
+        {
+            ChangePageEvent changePage = new ChangePageEvent();
+            changePage.pageName = "TeacherMainMenu";
+            this.eventAggregator.Publish(changePage);
+        }
+
+        public void InstantChecked()
+        {
+            if (this.Model.Instant is true)
+            {
+                this.Model.QuizType = "Instant";
+                this.Model.Instant = true;
+            }
+            else
+            {
+                this.Model.QuizType = "NotInstant";
+                this.Model.Instant = false;
+            }
+        }}
 }
