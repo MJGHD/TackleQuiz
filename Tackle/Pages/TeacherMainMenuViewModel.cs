@@ -30,5 +30,12 @@ namespace Tackle.Pages
             changePage.pageName = "ViewQuizzes";
             this.eventAggregator.Publish(changePage);
         }
+
+        public void ManageClasses()
+        {
+            ChangePageEvent changePage = new ChangePageEvent();
+            changePage.pageName = "ManageClasses";
+            this.eventAggregator.Publish(changePage);
+        }
     }
 }

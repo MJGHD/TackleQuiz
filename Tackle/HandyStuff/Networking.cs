@@ -15,7 +15,7 @@ namespace Networking
     {
         public string ServerRequest(string source, string[] parameters)
         {
-            IPAddress ServerIP = IPAddress.Parse("192.168.1.107");
+            IPAddress ServerIP = IPAddress.Parse("192.168.1.59");
             TcpClient client = new TcpClient();
 
             //Connects the client to the server and creates a TCP communication stream
@@ -60,6 +60,33 @@ namespace Networking
             else if(serialisation.requestSource == "JOINCLASS")
             {
                 byte[] readBuffer = new byte[64];
+
+                stream.Read(readBuffer, 0, readBuffer.Length);
+                string messageFromServer = Encoding.Default.GetString(readBuffer);
+
+                return messageFromServer;
+            }
+            else if(serialisation.requestSource == "DELETECLASS")
+            {
+                byte[] readBuffer = new byte[64];
+
+                stream.Read(readBuffer, 0, readBuffer.Length);
+                string messageFromServer = Encoding.Default.GetString(readBuffer);
+
+                return messageFromServer;
+            }
+            else if(serialisation.requestSource == "CREATECLASS")
+            {
+                byte[] readBuffer = new byte[64];
+
+                stream.Read(readBuffer, 0, readBuffer.Length);
+                string messageFromServer = Encoding.Default.GetString(readBuffer);
+
+                return messageFromServer;
+            }
+            else if (serialisation.requestSource == "CLASSLIST")
+            {
+                byte[] readBuffer = new byte[1000];
 
                 stream.Read(readBuffer, 0, readBuffer.Length);
                 string messageFromServer = Encoding.Default.GetString(readBuffer);

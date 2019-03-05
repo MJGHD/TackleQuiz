@@ -12,8 +12,8 @@ Request opening quizzes to the server - return QuizID and QuizContent. QuizConte
 2.
 b) If a student has logged in, then they should be shown a main menu with the options to view currently set quizzes; review their quiz history; request to join 
 a class and to view all public quizzes.
-3.	a) A teacher should be able to create a quiz with as many questions as they’d like, custom timing, whether it’s an instant result quiz or not, different 
-types of answering and custom questions.
+
+3.
 b) Once the teacher has created a quiz, they should be able to send it to their students and/or be given the option to upload it to the public database of 
 quizzes.
 c) If a teacher hasn’t finished a quiz, they should be given the option to save as a draft
@@ -24,7 +24,7 @@ c) When the user has pressed “Next” on the final question, they should be gi
 then if it’s an instant quiz, their mark is displayed with their position on the leaderboard, and their mark is sent to the teacher. If it’s not, they’re taken 
 back to the menu that they came back from and their answers are sent to the teacher to mark.
 6.	A student should be able to check if they have any homework that has been set by the teacher, and if they do, they should be able to take the quiz
-7.	a) A student or teacher should be able to browse and search the database of public quizzes
+7.
 b) When a student clicks on a public quiz, if it’s an instant quiz then they should be shown a UI with the leaderboard and a “Play” button, where pressing “Play”
  should take them to the quiz.
 c) When a teacher clicks on a public quiz, they should be given the options to “Play”, “Edit” or “Send to class”. If they press play, then they should play the 
