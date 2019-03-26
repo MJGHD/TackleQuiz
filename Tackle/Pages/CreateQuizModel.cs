@@ -16,11 +16,13 @@ namespace Tackle.Pages
         private string _quizType;
         private string _username;
         private List<string> _answers;
+        private List<string> _multiChoiceAnswers;
         private int _quizID;
         private string _quizTitle;
 
         private string _currentQuestion;
         private string _currentQuestionAnswer;
+        private string _multipleChoiceAnswer;
         private int _currentQuestionNumber;
         private string _questionNumberDisplay;
         private int _currentQuestionType;
@@ -30,6 +32,7 @@ namespace Tackle.Pages
         private List<string> _allMultipleChoiceInputs;
         private int _timeAllocated;
         private bool _instant;
+        private bool _public;
 
         public List<string> Questions
         {
@@ -51,6 +54,11 @@ namespace Tackle.Pages
             get { return this._answers; }
             set { SetAndNotify(ref this._answers, value); }
         }
+        public List<string> MultiChoiceAnswers
+        {
+            get { return this._multiChoiceAnswers; }
+            set { SetAndNotify(ref this._multiChoiceAnswers, value); }
+        }
         public int QuizID
         {
             get { return this._quizID; }
@@ -70,6 +78,11 @@ namespace Tackle.Pages
         {
             get { return this._currentQuestionAnswer; }
             set { SetAndNotify(ref this._currentQuestionAnswer, value); }
+        }
+        public string MultipleChoiceAnswer
+        {
+            get { return this._multipleChoiceAnswer; }
+            set { SetAndNotify(ref this._multipleChoiceAnswer, value); }
         }
         public int CurrentQuestionNumber
         {
@@ -123,6 +136,11 @@ namespace Tackle.Pages
             get { return this._instant; }
             set { SetAndNotify(ref this._instant, value); }
         }
+        public bool Public
+        {
+            get { return this._public; }
+            set { SetAndNotify(ref this._public, value); }
+        }
 
         public CreateQuizModel()
         {
@@ -131,6 +149,7 @@ namespace Tackle.Pages
             this.Answers = new List<string>();
             this.QuestionTypes = new List<int>();
             this.AllMultipleChoiceInputs = new List<string>();
+            this.MultiChoiceAnswers = new List<string>();
         }
     }
 }

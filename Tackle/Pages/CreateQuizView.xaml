@@ -58,6 +58,8 @@
                         <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}" MinWidth="50"/>
                         <TextBlock>Enter each multiple choice option with a comma between each element:</TextBlock>
                         <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}"/>
+                        <TextBlock>Enter the correct multiple choice option:</TextBlock>
+                        <TextBox Text="{Binding Path=Model.MultipleChoiceAnswer}"/>
                     </StackPanel>
                 </TabItem>
                 <!-- Settings -->
@@ -69,7 +71,8 @@
                         <TextBlock>Time Allocated (in seconds):</TextBlock>
                         <TextBox FontSize="20" Text="{Binding Path=Model.TimeAllocated}" MinWidth="250" PreviewTextInput="{s:Action NumericalInputFilter}"/>
 
-                        <CheckBox Command="{s:Action InstantChecked}" IsChecked="{Binding Path=Model.Instant}" Content="Instant Quiz"/>
+                        <CheckBox Command="{s:Action CheckBoxChangeState}" CommandParameter="Instant" IsChecked="{Binding Path=Model.Instant}" Content="Instant Quiz"/>
+                        <CheckBox Command="{s:Action CheckBoxChangeState}" CommandParameter="Public" IsChecked="{Binding Path=Model.Public}" Content="Public"/>
 
                         <Button Command="{s:Action QuitSettings}" Width="100">Close Settings</Button>
                     </StackPanel>

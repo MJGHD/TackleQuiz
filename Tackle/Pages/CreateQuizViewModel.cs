@@ -41,13 +41,19 @@ namespace Tackle.Pages
 
         public void NextQuestion()
         {
-            SaveQuestion();
-            this.Model.CurrentQuestionNumber += 1;
-            SetUpQuestion();
+            //Limits the amount of questions to 50
+            if (this.Model.CurrentQuestionNumber != 49)
+            {
+                SaveQuestion();
+                this.Model.CurrentQuestionNumber += 1;
+                SetUpQuestion();
+            }
         }
 
         public void PreviousQuestion()
         {
+            SaveQuestion();
+
             //Goes back if it isn't the first question
             if (this.Model.CurrentQuestionNumber != 0)
             {
@@ -65,16 +71,18 @@ namespace Tackle.Pages
                 this.Model.Answers.Add("");
                 this.Model.QuestionTypes.Add(0);
                 this.Model.AllMultipleChoiceInputs.Add("");
+                this.Model.MultiChoiceAnswers.Add("");
             }
+
+            this.Model.CurrentQuestionType = this.Model.QuestionTypes[this.Model.CurrentQuestionNumber];
 
             this.Model.CurrentQuestion = this.Model.Questions[this.Model.CurrentQuestionNumber];
             this.Model.CurrentQuestionAnswer = this.Model.Answers[this.Model.CurrentQuestionNumber];
 
             this.Model.QuestionNumberDisplay = $"Question {this.Model.CurrentQuestionNumber + 1}/{this.Model.Questions.Count}";
 
-            this.Model.CurrentQuestionType = this.Model.QuestionTypes[this.Model.CurrentQuestionNumber];
-
             this.Model.MultipleChoiceInputs = this.Model.AllMultipleChoiceInputs[this.Model.CurrentQuestionNumber];
+            this.Model.MultipleChoiceAnswer = this.Model.MultiChoiceAnswers[this.Model.CurrentQuestionNumber];
 
             //Set up next button text
             if (this.Model.CurrentQuestionNumber == this.Model.Questions.Count - 1)
@@ -142,6 +150,7 @@ namespace Tackle.Pages
                 this.Model.Answers[this.Model.CurrentQuestionNumber] = this.Model.CurrentQuestionAnswer;
                 this.Model.QuestionTypes[this.Model.CurrentQuestionNumber] = this.Model.CurrentQuestionType;
                 this.Model.AllMultipleChoiceInputs[this.Model.CurrentQuestionNumber] = this.Model.MultipleChoiceInputs;
+                this.Model.MultiChoiceAnswers[this.Model.CurrentQuestionNumber] = this.Model.MultipleChoiceAnswer;
             }
         }
 
@@ -165,6 +174,17 @@ namespace Tackle.Pages
             this.Model.Answers.Add(this.Model.CurrentQuestionAnswer);
             this.Model.AllMultipleChoiceInputs.Add(this.Model.MultipleChoiceInputs);
             this.Model.QuestionTypes.Add(this.Model.CurrentQuestionType);
+
+            //If the multiple choice answer field isn't null, then add the inputted answer. If it is, then add a blank string
+            if (!(this.Model.MultipleChoiceAnswer is null))
+            {
+                this.Model.MultiChoiceAnswers.Add(this.Model.MultipleChoiceAnswer);
+            }
+            else
+            {
+                this.Model.MultiChoiceAnswers.Add("");
+            }
+            
         }
 
         public void FinishQuiz()
@@ -214,6 +234,15 @@ namespace Tackle.Pages
                 }
                 counter += 1;
             }
+
+            //Saves the expected answer for the multiple choice questions as the normal answer
+            for(int i = 0; i < this.Model.Questions.Count; i++)
+            {
+                if(this.Model.MultiChoiceAnswers[i] != "")
+                {
+                    this.Model.Answers[i] = this.Model.MultiChoiceAnswers[i];
+                }
+            }
         }
 
         string Submit(Quiz.Quiz quiz)
@@ -222,7 +251,7 @@ namespace Tackle.Pages
             string quizJSON = serverRequest.Serialise(quiz);
 
             ServerConnection server = new ServerConnection();
-            string success = server.ServerRequest("CREATEQUIZ", new string[] {this.Model.Username,this.Model.QuizType,this.Model.QuizTitle,quizJSON });
+            string success = server.ServerRequest("CREATEQUIZ", new string[] {this.Model.Username,this.Model.QuizType,this.Model.QuizTitle,quizJSON,this.Model.Public.ToString() });
 
             //Removes UTF-8 encoding's annoying "\0" character for whitespaece
             success = success.Replace("\0", string.Empty);
@@ -251,17 +280,32 @@ namespace Tackle.Pages
             this.eventAggregator.Publish(changePage);
         }
 
-        public void InstantChecked()
+        public void CheckBoxChangeState(string type)
         {
-            if (this.Model.Instant is true)
+            Debug.WriteLine(type);
+            if (type == "Instant")
             {
-                this.Model.QuizType = "Instant";
-                this.Model.Instant = true;
+                if (this.Model.Instant is true)
+                {
+                    this.Model.QuizType = "Instant";
+                    this.Model.Instant = true;
+                }
+                else
+                {
+                    this.Model.QuizType = "NotInstant";
+                    this.Model.Instant = false;
+                }
             }
             else
             {
-                this.Model.QuizType = "NotInstant";
-                this.Model.Instant = false;
+                if (this.Model.Public is true)
+                {
+                    this.Model.Public = true;
+                }
+                else
+                {
+                    this.Model.Public = false;
+                }
             }
         }}
 }
