@@ -38,8 +38,9 @@ namespace Tackle.Pages
             if (signUpRequest != "FAILED")
             {
                 ChangePageEvent pageEvent = new ChangePageEvent();
+                Debug.WriteLine(signUpRequest);
                 
-                if(signUpRequest == "True")
+                if(signUpRequest == "TEACHER")
                 {
                     pageEvent.pageName = "TeacherMainMenu";
                 }
@@ -50,7 +51,7 @@ namespace Tackle.Pages
 
                 UsernameEvent usernameEvent = new UsernameEvent();
                 usernameEvent.username = Details.Username;
-                if(signUpRequest == "True")
+                if(signUpRequest == "TEACHER")
                 {
                     usernameEvent.userType = "TEACHER";
                 }
@@ -104,7 +105,7 @@ namespace Tackle.Pages
             }
             else
             {
-                MessageBox.Show("Sign up unsuccessful. Check internet connection or try a different username");
+                MessageBox.Show("Sign up/log in unsuccessful. Please make sure that your credentials are correct, or try a different username");
                 Details.ButtonClickable = "True";
             }
 

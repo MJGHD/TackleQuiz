@@ -15,7 +15,7 @@ namespace Networking
     {
         public string ServerRequest(string source, string[] parameters)
         {
-            IPAddress ServerIP = IPAddress.Parse("192.168.1.59");
+            IPAddress ServerIP = IPAddress.Parse("10.25.131.127");
             TcpClient client = new TcpClient();
 
             //Connects the client to the server and creates a TCP communication stream
