@@ -60,6 +60,7 @@
         </TabControl>
 
         <Button Grid.Row="3" HorizontalAlignment="Left" Command="{s:Action PreviousQuestion}">Previous Question</Button>
+        <Button Grid.Row="3" HorizontalAlignment="Center" Command="{s:Action Quit}">Quit</Button>
         <Button Grid.Row="3" HorizontalAlignment="Right" Command="{s:Action NextQuestion}" Content="{Binding Path=Model.NextButtonText}"/>
 
     </Grid>

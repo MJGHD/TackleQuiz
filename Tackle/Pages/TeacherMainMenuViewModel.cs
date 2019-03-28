@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EventAggr;
+﻿using EventAggr;
 using Stylet;
 
 namespace Tackle.Pages
@@ -35,6 +30,13 @@ namespace Tackle.Pages
         {
             ChangePageEvent changePage = new ChangePageEvent();
             changePage.pageName = "ManageClasses";
+            this.eventAggregator.Publish(changePage);
+        }
+
+        public void DraftList()
+        {
+            ChangePageEvent changePage = new ChangePageEvent();
+            changePage.pageName = "DraftList";
             this.eventAggregator.Publish(changePage);
         }
     }

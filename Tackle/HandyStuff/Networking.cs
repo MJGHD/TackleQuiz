@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using JSON;
 
 namespace Networking
@@ -15,7 +11,7 @@ namespace Networking
     {
         public string ServerRequest(string source, string[] parameters)
         {
-            IPAddress ServerIP = IPAddress.Parse("192.168.1.140");
+            IPAddress ServerIP = IPAddress.Parse("192.168.1.107");
             TcpClient client = new TcpClient();
 
             //Connects the client to the server and creates a TCP communication stream
@@ -75,7 +71,7 @@ namespace Networking
 
                 return messageFromServer;
             }
-            else if(serialisation.requestSource == "CREATECLASS")
+            else if(serialisation.requestSource == "CREATECLASS" || serialisation.requestSource == "CREATEDRAFT" || serialisation.requestSource == "SENDTOCLASS" || serialisation.requestSource == "DELETEDRAFT")
             {
                 byte[] readBuffer = new byte[64];
 
@@ -112,7 +108,7 @@ namespace Networking
 
                 return messageFromServer;
             }
-            else if (serialisation.requestSource == "QUIZLIST")
+            else if (serialisation.requestSource == "QUIZLIST" || serialisation.requestSource == "DRAFTLIST")
             {
                 byte[] readBuffer = new byte[1000];
 

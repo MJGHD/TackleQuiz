@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EventAggr;
+﻿using EventAggr;
 using Networking;
 using Newtonsoft.Json;
 using Stylet;
+using System.Diagnostics;
 
 namespace Tackle.Pages
 {
@@ -16,12 +11,15 @@ namespace Tackle.Pages
         public QuizListModel Model { get; set; }
 
         IEventAggregator eventAggregator;
+        IWindowManager windowManager;
 
         string userType;
+        string username;
 
-        public QuizListViewModel(IEventAggregator eventAggregator, string userType)
+        public QuizListViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, string userType, string username)
         {
             this.eventAggregator = eventAggregator;
+            this.windowManager = windowManager;
             this.userType = userType;
 
             this.Model = new QuizListModel();
@@ -55,7 +53,19 @@ namespace Tackle.Pages
 
         public void Select(int quizID)
         {
-            if (this.userType == "STUDENT")
+            if (this.userType == "TEACHER")
+            {
+                this.windowManager.ShowDialog(new QuizSelectViewModel(quizID.ToString(), this.username, false, this.eventAggregator, this.windowManager));
+                if(!(this.Model.SearchText is null))
+                {
+                    SendQuizRequest(this.Model.SearchText);
+                }
+                else
+                {
+                    SendQuizRequest("");
+                }
+            }
+            else
             {
                 TakeQuiz(quizID);
             }

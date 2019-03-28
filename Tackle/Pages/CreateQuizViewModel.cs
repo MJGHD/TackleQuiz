@@ -1,40 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Stylet;
 using EventAggr;
-using System.IO;
-using System.IO.Compression;
 using Networking;
 using JSON;
-using Quiz;
 
-//TOOO: make it so that at the end, the multiple choice questions get the options appended to them (in the finish quiz function)
+//TOOO: multiple choice denormalisation when editing a quiz
+//       if when finishing a quiz they haven't marked as public, ask if they want to save as a draft or send to a class
 
 namespace Tackle.Pages
 {
-    class CreateQuizViewModel
+    class CreateQuizViewModel : IHandle<string>
     {
         public CreateQuizModel Model { get; set; }
         private IEventAggregator eventAggregator;
+        private IWindowManager windowManager;
 
-        public CreateQuizViewModel(IEventAggregator eventAggregator, string username)
+        //Used only when sending a quiz to a class
+        string classID;
+
+        public CreateQuizViewModel(IEventAggregator eventAggregator, string username, IWindowManager windowManager, string quizJSON)
         {
             this.eventAggregator = eventAggregator;
+            //subscribe to the event aggregator for sending the quiz to a class at the end
+            eventAggregator.Subscribe(this);
+
+            this.windowManager = windowManager;
+
             this.Model = new CreateQuizModel();
 
             this.Model.Username = username;
 
+            //Sets the default values for quiz entry
             this.Model.CurrentQuestionNumber = 0;
             this.Model.NextButtonText = "Add question";
             this.Model.QuestionNumberDisplay = "Question 1/1";
             this.Model.Instant = true;
+            this.Model.QuizType = "Instant";
+            this.Model.Public = true;
             //start on settings
             this.Model.CurrentQuestionType = 3;
         }
@@ -121,6 +127,7 @@ namespace Tackle.Pages
 
         public void QuitSettings()
         {
+            Debug.WriteLine(this.Model.TimeAllocated);
             //checks if the title and time allowed are empty
             if (this.Model.QuizTitle != "" && this.Model.QuizTitle != null && this.Model.TimeAllocated != 0)
             {
@@ -189,17 +196,79 @@ namespace Tackle.Pages
 
         public void FinishQuiz()
         {
-            string success = SaveQuiz();
-
-            if(success == "success")
+            //If the quiz is public, then just submit, otherwise give the teacher options to save as draft or send to a class
+            if (this.Model.Public)
             {
-                MessageBox.Show("Quiz submission successful");
-                TeacherMainMenu();
-                this.eventAggregator.Publish("TeacherMainMenu");
+                string success = SaveQuiz();
+
+                if (success == "success")
+                {
+                    MessageBox.Show("Quiz submission successful");
+                    TeacherMainMenu();
+                    this.eventAggregator.Publish("TeacherMainMenu");
+
+                }
+                else
+                {
+                    MessageBox.Show("Quiz submission unsuccessful");
+                }
             }
             else
             {
-                MessageBox.Show("Quiz submission unsuccessful");
+                //if the user wants to send it to their class, then they're given a dialog box with a class ID to send it to
+                MessageBoxResult result = MessageBox.Show("Send to a class?", "Send to class", MessageBoxButton.YesNo);
+                if(result.ToString() == "Yes")
+                {
+                    var classIDViewModel = new ClassSendViewModel(this.eventAggregator);
+                    this.windowManager.ShowDialog(classIDViewModel);
+                    SubmitToClass(this.classID);
+                }
+
+                //If the user wants to save as a draft, then they are able to
+                result = MessageBox.Show("Save as draft?", "Save draft", MessageBoxButton.YesNo);
+
+                if (result.ToString() == "Yes")
+                {
+                    string success = SaveDraft();
+                    if(success == "success")
+                    {
+                        MessageBox.Show("Draft saved successfully");
+                        TeacherMainMenu();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Draft saved unsuccessfully");
+                    }
+                }
+            }
+        }
+
+        //Handles string event published from the class entry dialog box
+        public void Handle(string classID)
+        {
+            this.classID = classID;
+        }
+
+        public void Quit()
+        {
+            MessageBoxResult result = MessageBox.Show("Save as draft?","Save",MessageBoxButton.YesNoCancel);
+            if(result.ToString() == "Yes")
+            {
+                string success = SaveDraft();
+
+                if(success == "success")
+                {
+                    MessageBox.Show("Draft creation successful");
+                    TeacherMainMenu();
+                }
+                else
+                {
+                    MessageBox.Show("Draft creation unsuccessful");
+                }
+            }
+            else if(result.ToString() == "No")
+            {
+                TeacherMainMenu();
             }
         }
 
@@ -216,6 +285,19 @@ namespace Tackle.Pages
 
             //Submit to server
             string success = Submit(quiz);
+
+            return success;
+        }
+
+        string SaveDraft()
+        {
+            SaveQuestion();
+
+            MultiChoiceNormalisation();
+
+            Quiz.Quiz quiz = MakeQuiz();
+
+            string success = DraftSubmit(quiz);
 
             return success;
         }
@@ -245,6 +327,7 @@ namespace Tackle.Pages
             }
         }
 
+        //Submits the finished public quiz to the server
         string Submit(Quiz.Quiz quiz)
         {
             ServerRequest serverRequest = new ServerRequest();
@@ -252,6 +335,38 @@ namespace Tackle.Pages
 
             ServerConnection server = new ServerConnection();
             string success = server.ServerRequest("CREATEQUIZ", new string[] {this.Model.Username,this.Model.QuizType,this.Model.QuizTitle,quizJSON,this.Model.Public.ToString() });
+
+            //Removes UTF-8 encoding's annoying "\0" character for whitespaece
+            success = success.Replace("\0", string.Empty);
+
+            return success;
+        }
+
+        string SubmitToClass(string classID)
+        {
+            SaveQuestion();
+            Quiz.Quiz quiz = MakeQuiz();
+
+            ServerRequest serverRequest = new ServerRequest();
+            string quizJSON = serverRequest.Serialise(quiz);
+
+            ServerConnection server = new ServerConnection();
+            string success = server.ServerRequest("SUBMITQUIZTOCLASS", new string[] { this.Model.Username, this.Model.QuizType, this.Model.QuizTitle, quizJSON, classID });
+
+            //Removes UTF-8 encoding's annoying "\0" character for whitespaece
+            success = success.Replace("\0", string.Empty);
+
+            return success;
+        }
+
+        //Submits a draft quiz
+        string DraftSubmit(Quiz.Quiz quiz)
+        {
+            ServerRequest serverRequest = new ServerRequest();
+            string quizJSON = serverRequest.Serialise(quiz);
+
+            ServerConnection server = new ServerConnection();
+            string success = server.ServerRequest("CREATEDRAFT", new string[] { this.Model.Username, this.Model.QuizType, this.Model.QuizTitle, quizJSON});
 
             //Removes UTF-8 encoding's annoying "\0" character for whitespaece
             success = success.Replace("\0", string.Empty);

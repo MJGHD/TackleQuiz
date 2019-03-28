@@ -1,6 +1,4 @@
-﻿using System;
-using EventAggr;
-using Results;
+﻿using Results;
 using Stylet;
 
 namespace Tackle.Pages

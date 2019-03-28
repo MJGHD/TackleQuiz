@@ -1,0 +1,19 @@
+﻿<Window x:Class="Tackle.Pages.ClassSendView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:local="clr-namespace:Tackle.Pages"
+             mc:Ignorable="d" 
+             Height="200" Width="200" Title="Send to class">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock>Class ID:</TextBlock>
+            <TextBox Text="{Binding Path=Model.ClassID}"/>
+            <Button Content="Send" Command="{s:Action Close}"/>
+        </StackPanel>
+        
+
+    </Grid>
+</Window>

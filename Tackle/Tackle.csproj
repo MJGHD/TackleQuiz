@@ -86,8 +86,15 @@
     <Compile Include="HandyStuff\QuizHandling.cs" />
     <Compile Include="HandyStuff\QuizResults.cs" />
     <Compile Include="HandyStuff\UsernameEvent.cs" />
+    <Compile Include="Pages\ClassSendModel.cs" />
+    <Compile Include="Pages\ClassSendViewModel.cs" />
     <Compile Include="Pages\CreateQuizModel.cs" />
     <Compile Include="Pages\CreateQuizViewModel.cs" />
+    <Compile Include="Pages\DraftListModel.cs" />
+    <Compile Include="Pages\DraftListView.xaml.cs">
+      <DependentUpon>DraftListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DraftListViewModel.cs" />
     <Compile Include="Pages\JoinClassModel.cs" />
     <Compile Include="Pages\JoinClassViewModel.cs" />
     <Compile Include="Pages\LogInModel.cs" />
@@ -104,6 +111,10 @@
     <Compile Include="Pages\QuizListViewModel.cs" />
     <Compile Include="Pages\QuizScreenModel.cs" />
     <Compile Include="Pages\QuizScreenViewModel.cs" />
+    <Compile Include="Pages\QuizSelectView.xaml.cs">
+      <DependentUpon>QuizSelectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuizSelectViewModel.cs" />
     <Compile Include="Pages\QuizSubmitModel.cs" />
     <Compile Include="Pages\QuizSubmitViewModel.cs" />
     <Compile Include="Pages\ShellViewModel.cs" />
@@ -138,7 +149,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Pages\ClassSendView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CreateQuizView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DraftListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\QuizScreenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuizSelectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,4 @@
 ﻿using Results;
-using Quiz;
 
 namespace EventAggr
 {

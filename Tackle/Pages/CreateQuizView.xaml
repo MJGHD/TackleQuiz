@@ -36,18 +36,18 @@
                 <TabItem TabIndex="0" Width="0">
                     <StackPanel>
                         <TextBlock HorizontalAlignment="Center">Question:</TextBlock>
-                        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}" MinWidth="50"/>
+                        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}" MinWidth="50" MaxLength="20"/>
                         <TextBlock>Expected answer:</TextBlock>
-                        <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}" Height="300"/>
+                        <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}" Height="300" MaxLength="150"/>
                     </StackPanel>
                 </TabItem>
                 <!-- Integer input -->
                 <TabItem TabIndex="1" Width="0">
                     <StackPanel>
                         <TextBlock HorizontalAlignment="Center">Question:</TextBlock>
-                        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}" MinWidth="50"/>
+                        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}" MinWidth="50" MaxLength="20"/>
                         <TextBlock>Expected answer: (Integers only)</TextBlock>
-                        <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}" PreviewTextInput="{s:Action NumericalInputFilter}" Height="300"/>
+                        <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}" PreviewTextInput="{s:Action NumericalInputFilter}" Height="300" MaxLength="150"/>
                     </StackPanel>
 
                 </TabItem>
@@ -55,18 +55,18 @@
                 <TabItem TabIndex="2" Width="0">
                     <StackPanel>
                         <TextBlock HorizontalAlignment="Center">Question:</TextBlock>
-                        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}" MinWidth="50"/>
+                        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Text="{Binding Path=Model.CurrentQuestion}" MinWidth="50" MaxLength="20"/>
                         <TextBlock>Enter each multiple choice option with a comma between each element:</TextBlock>
-                        <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}"/>
+                        <TextBox Text="{Binding Path=Model.CurrentQuestionAnswer}" MaxLength="301"/>
                         <TextBlock>Enter the correct multiple choice option:</TextBlock>
-                        <TextBox Text="{Binding Path=Model.MultipleChoiceAnswer}"/>
+                        <TextBox Text="{Binding Path=Model.MultipleChoiceAnswer}" MaxLength="150"/>
                     </StackPanel>
                 </TabItem>
                 <!-- Settings -->
                 <TabItem TabIndex="3" Width="0">
                     <StackPanel HorizontalAlignment="Center">
                         <TextBlock>Quiz Title:</TextBlock>
-                        <TextBox FontSize="20" Text="{Binding Path=Model.QuizTitle}" MinWidth="250"/>
+                        <TextBox FontSize="20" Text="{Binding Path=Model.QuizTitle}" MinWidth="250" MaxLength="20"/>
 
                         <TextBlock>Time Allocated (in seconds):</TextBlock>
                         <TextBox FontSize="20" Text="{Binding Path=Model.TimeAllocated}" MinWidth="250" PreviewTextInput="{s:Action NumericalInputFilter}"/>
@@ -81,7 +81,12 @@
             </TabControl>
 
             <Button Grid.Row="3" HorizontalAlignment="Left" Command="{s:Action PreviousQuestion}">Previous Question</Button>
-            <Button Grid.Row="3" HorizontalAlignment="Center" Command="{s:Action FinishQuiz}">Finish Quiz</Button>
+            <!-- Center elements -->
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="3">
+                <Button Command="{s:Action Quit}" Margin="0,0,5,0">Quit</Button>
+                <Button Command="{s:Action FinishQuiz}">Finish Quiz</Button>
+            </StackPanel>
+
             <Button Grid.Row="3" HorizontalAlignment="Right" Command="{s:Action NextQuestion}" Content="{Binding Path=Model.NextButtonText}"/>
 
         </Grid>

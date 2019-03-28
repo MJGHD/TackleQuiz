@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Stylet;
+﻿using Stylet;
 
 namespace Tackle.Pages
 {
@@ -31,7 +26,7 @@ namespace Tackle.Pages
     }
 
     //class that will be used for the quiz list
-    class Quizzes
+    public class Quizzes
     {
         public int quizID { get; set; }
         public string username { get; set; }
@@ -40,7 +35,7 @@ namespace Tackle.Pages
     }
 
     //class for the JSON to be deserialised into
-    class QuizList
+    public class QuizList
     {
         public int[] quizIDs;
         public string[] usernames;

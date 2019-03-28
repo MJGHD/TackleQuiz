@@ -9,23 +9,26 @@ using EventAggr;
 using Results;
 using Networking;
 using JSON;
+using System.Windows;
+using System.Diagnostics;
+using System.Timers;
 
 namespace Tackle.Pages
 {
     class QuizScreenViewModel
     {
         int quizID;
+        string userType;
         public QuizScreenModel Model { get; set; }
-        DispatcherTimer timer;
+        Timer timer;
         private IEventAggregator eventAggregator;
 
-        public QuizScreenViewModel(int quizID, IEventAggregator eventAggregator)
+        public QuizScreenViewModel(int quizID, string userType, IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
             this.quizID = quizID;
+            this.userType = userType;
             this.Model = new QuizScreenModel();
-
-            SetTimerSettings();
 
             string JSON = QuizHandling.GetQuizJSON(this.quizID);
             (Model.Questions, Model.QuestionTypes, Model.Answers, Model.TimeLeft, Model.QuizType) = QuizHandling.OpenQuiz(JSON);
@@ -33,13 +36,15 @@ namespace Tackle.Pages
             Model.UserInputs = new string[Model.Questions.Length];
             this.Model.NextButtonText = "Next Question";
             SetFirstQuestion();
-            timer.Start();
+
+            SetTimerSettings();
         }
 
         void TimerTick(object sender, EventArgs e)
         {
             Model.TimeLeft -= 1;
-            if(Model.TimeLeft == 0)
+            //If time has finished, finish the quiz
+            if(Model.TimeLeft < 1)
             {
                 FinishQuiz();
             }
@@ -51,9 +56,10 @@ namespace Tackle.Pages
 
         void SetTimerSettings()
         {
-            timer = new DispatcherTimer();
-            timer.Tick += TimerTick;
-            timer.Interval = new TimeSpan(0, 0, 1);
+            //Makes it so that the timer ticks every second, and then every second it called the TimerTick function
+            timer = new Timer(1000);
+            timer.Elapsed += new ElapsedEventHandler(TimerTick);
+            timer.Start();
         }
 
         void SetQuestionType()
@@ -193,6 +199,27 @@ namespace Tackle.Pages
             changePage.pageName = "QuizSubmit";
             changePage.results = results;
             this.eventAggregator.Publish(changePage);
+        }
+
+        public void Quit()
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to quit?","Quit quiz",MessageBoxButton.YesNo);
+            if(result.ToString() == "Yes")
+            {
+                Debug.WriteLine(this.userType);
+                if (this.userType == "TEACHER")
+                {
+                    ChangePageEvent changePage = new ChangePageEvent();
+                    changePage.pageName = "TeacherMainMenu";
+                    this.eventAggregator.Publish(changePage);
+                }
+                else
+                {
+                    ChangePageEvent changePage = new ChangePageEvent();
+                    changePage.pageName = "StudentMainMenu";
+                    this.eventAggregator.Publish(changePage);
+                }
+            }
         }
 
         QuizResults AddInstantQuizValues(QuizResults results)
