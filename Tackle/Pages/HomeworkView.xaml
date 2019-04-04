@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Tackle.Pages.HomeworkView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:local="clr-namespace:Tackle.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ListView Margin="10" Grid.Row="1" ItemsSource="{Binding Path=Model.List}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <UniformGrid Columns="5">
+                        <TextBlock>Quiz ID:</TextBlock>
+                        <TextBlock>Quiz Name:</TextBlock>
+                        <TextBlock>Quiz Type:</TextBlock>
+                        <TextBlock>Username of creator:</TextBlock>
+                        <TextBlock>High score:</TextBlock>
+                        <TextBlock Text="{Binding Path=quizID}"/>
+                        <TextBlock Text="{Binding Path=quizName}"/>
+                        <TextBlock Text="{Binding Path=quizType}"/>
+                        <TextBlock Text="{Binding Path=username}"/>
+                        <TextBlock Text="{Binding Path=topMark}"/>
+                        <Button Content="Select" Command="{s:Action Select}" CommandParameter="{Binding Path=quizID}"/>
+                    </UniformGrid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Row="1" Height="20" Width="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" Command="{s:Action Back}">Back</Button>
+    </Grid>
+</UserControl>

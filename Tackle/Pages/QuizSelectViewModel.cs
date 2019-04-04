@@ -39,7 +39,10 @@ namespace Tackle.Pages
 
         public void Edit()
         {
-            //Get the JSON from the server
+            ChangePageEvent changePage = new ChangePageEvent();
+            changePage.pageName = "EditQuiz";
+            changePage.quizID = Int32.Parse(quizID);
+            this.eventAggregator.Publish(changePage);
             this.RequestClose(true);
         }
 

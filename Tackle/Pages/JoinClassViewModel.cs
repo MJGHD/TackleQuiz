@@ -26,7 +26,7 @@ namespace Tackle.Pages
 
             if (joinClassAttempt == "success")
             {
-                MessageBox.Show($"Successfully joined the class {model.ClassID}");
+                MessageBox.Show($"Successfully requested to join the class {model.ClassID}");
 
                 ChangePageEvent changePage = new ChangePageEvent();
                 changePage.pageName = "StudentMainMenu";

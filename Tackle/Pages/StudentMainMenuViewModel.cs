@@ -25,5 +25,12 @@ namespace Tackle.Pages
             pageEvent.pageName = "ViewQuizzes";
             this.eventAggregator.Publish(pageEvent);
         }
+
+        public void ViewHomework()
+        {
+            ChangePageEvent pageEvent = new ChangePageEvent();
+            pageEvent.pageName = "HomeworkList";
+            this.eventAggregator.Publish(pageEvent);
+        }
     }
 }

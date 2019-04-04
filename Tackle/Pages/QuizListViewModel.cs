@@ -20,6 +20,7 @@ namespace Tackle.Pages
         {
             this.eventAggregator = eventAggregator;
             this.windowManager = windowManager;
+            this.username = username;
             this.userType = userType;
 
             this.Model = new QuizListModel();
@@ -81,6 +82,20 @@ namespace Tackle.Pages
             ChangePageEvent changePage = new ChangePageEvent();
             changePage.pageName = "TakeQuiz";
             changePage.quizID = quizID;
+            this.eventAggregator.Publish(changePage);
+        }
+
+        public void Back()
+        {
+            ChangePageEvent changePage = new ChangePageEvent();
+            if(this.userType == "STUDENT")
+            {
+                changePage.pageName = "StudentMainMenu";
+            }
+            else
+            {
+                changePage.pageName = "TeacherMainMenu";
+            }
             this.eventAggregator.Publish(changePage);
         }
     }

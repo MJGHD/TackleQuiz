@@ -7,6 +7,8 @@ using Stylet;
 using EventAggr;
 using Networking;
 using JSON;
+using Quiz;
+using System.Collections.Generic;
 
 //TOOO: multiple choice denormalisation when editing a quiz
 //       if when finishing a quiz they haven't marked as public, ask if they want to save as a draft or send to a class
@@ -22,7 +24,7 @@ namespace Tackle.Pages
         //Used only when sending a quiz to a class
         string classID;
 
-        public CreateQuizViewModel(IEventAggregator eventAggregator, string username, IWindowManager windowManager, string quizJSON)
+        public CreateQuizViewModel(IEventAggregator eventAggregator, string username, IWindowManager windowManager, int quizID)
         {
             this.eventAggregator = eventAggregator;
             //subscribe to the event aggregator for sending the quiz to a class at the end
@@ -34,15 +36,31 @@ namespace Tackle.Pages
 
             this.Model.Username = username;
 
-            //Sets the default values for quiz entry
             this.Model.CurrentQuestionNumber = 0;
             this.Model.NextButtonText = "Add question";
-            this.Model.QuestionNumberDisplay = "Question 1/1";
-            this.Model.Instant = true;
-            this.Model.QuizType = "Instant";
             this.Model.Public = true;
-            //start on settings
-            this.Model.CurrentQuestionType = 3;
+            
+
+            if (quizID != -1)
+            {
+                string JSON = QuizHandling.GetQuizJSON(quizID);
+                //temporary to return values into
+                string[] questions;
+                int[] questionTypes;
+                string[] answers;
+                (questions, questionTypes, answers, Model.TimeAllocated, Model.QuizType) = QuizHandling.OpenQuiz(JSON);
+                FillModel(questions,questionTypes,answers);
+                SetUpQuestion();
+            }
+            else
+            {
+                //Sets the default values for quiz entry
+                this.Model.QuestionNumberDisplay = "Question 1/1";
+                this.Model.Instant = true;
+                this.Model.QuizType = "Instant";
+                //start on settings
+                this.Model.CurrentQuestionType = 3;
+            }
         }
 
         public void NextQuestion()
@@ -422,5 +440,58 @@ namespace Tackle.Pages
                     this.Model.Public = false;
                 }
             }
-        }}
+        }
+
+        //fills model when editing quiz
+        void FillModel(string[] questions, int[] questionTypes, string[] answers)
+        {
+            int counter = 0;
+
+            foreach(string question in questions)
+            {
+                //if it's a multiple choice question, add the appropriate values
+                if (questionTypes[counter] == 2)
+                {
+                    string tempQuestion;
+                    string multiChoice;
+                    (multiChoice, tempQuestion) = GetMultipleChoices(question);
+                    this.Model.AllMultipleChoiceInputs.Add("");
+                    this.Model.MultiChoiceAnswers.Add(answers[counter]);
+                    this.Model.Questions.Add(tempQuestion);
+                    this.Model.Answers.Add(multiChoice);
+                }
+                else
+                {
+                    this.Model.AllMultipleChoiceInputs.Add("");
+                    this.Model.MultiChoiceAnswers.Add("");
+                    this.Model.Questions.Add(question);
+                    this.Model.Answers.Add(answers[counter]);
+                }
+
+                this.Model.QuestionTypes.Add(questionTypes[counter]);
+
+                counter += 1;
+            }
+        }
+
+        //Gets the multiple choice options from the questions
+        (string, string) GetMultipleChoices(string question)
+        {
+            List<string> choices = new List<string> { };
+
+            //Gets the indexes of the beginning and end of the choices
+            int choiceStart = question.IndexOf('{');
+            int choiceEnd = question.IndexOf('}');
+
+            //Removes the start and end of the end of the choices and then adds the choices to the options array
+            string choiceString = question.Remove(0, choiceStart + 1);
+            choiceString = choiceString.TrimEnd('}');
+
+            //Removes the choices from the question for displaying
+            int removeCount = (choiceEnd - choiceStart) + 1;
+            question = question.Remove(choiceStart, removeCount);
+
+            return (choiceString, question);
+        }
+    }
 }

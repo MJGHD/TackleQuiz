@@ -11,9 +11,9 @@
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button Command="{s:Action CreateQuiz}" Margin="0,0,0,5" FontSize="24">Create Quiz</Button>
             <Button Command="{s:Action DraftList}" Margin="0,0,0,5" FontSize="24">View Draft Quizzes</Button>
-            <Button Margin="0,0,0,5" FontSize="24">View Currently Set Quizzes</Button>
+            <Button Command="{s:Action ViewSetQuizzes}" Margin="0,0,0,5" FontSize="24">View Set Quizzes</Button>
             <Button Command="{s:Action ViewPublicQuizzes}" Margin="0,0,0,5" FontSize="24">View Public Quizzes</Button>
-            <Button Margin="0,0,0,5" FontSize="24">Mark Quizzes</Button>
+            <Button Command="{s:Action MarkQuizList}" Margin="0,0,0,5" FontSize="24">Mark Quizzes</Button>
             <Button Margin="0,0,0,5" FontSize="24" Command="{s:Action ManageClasses}">Manage Classes</Button>
         </StackPanel>
     </Grid>

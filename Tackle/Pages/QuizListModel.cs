@@ -1,4 +1,5 @@
 ﻿using Stylet;
+using System.Collections.Generic;
 
 namespace Tackle.Pages
 {
@@ -32,6 +33,11 @@ namespace Tackle.Pages
         public string username { get; set; }
         public string quizType { get; set; }
         public string quizName { get; set; }
+        public string topMark { get; set; }
+        //used in the TeacherQuizHistoryModel
+        public string quizContent { get; set; }
+
+        public int pointer { get; set; }
     }
 
     //class for the JSON to be deserialised into
@@ -41,5 +47,8 @@ namespace Tackle.Pages
         public string[] usernames;
         public string[] quizType;
         public string[] quizNames;
+        public string[] topMarks;
+        //used in the TeacherQuizHistoryModel
+        public string[] quizContents;
     }
 }

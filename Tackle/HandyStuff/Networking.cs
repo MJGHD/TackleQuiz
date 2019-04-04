@@ -11,7 +11,7 @@ namespace Networking
     {
         public string ServerRequest(string source, string[] parameters)
         {
-            IPAddress ServerIP = IPAddress.Parse("192.168.1.107");
+            IPAddress ServerIP = IPAddress.Parse("192.168.1.140");
             TcpClient client = new TcpClient();
 
             //Connects the client to the server and creates a TCP communication stream
@@ -27,7 +27,7 @@ namespace Networking
             byte[] messageToServer = Encoding.ASCII.GetBytes(json);
             stream.Write(messageToServer, 0, messageToServer.Length);
 
-            //Handling the response from the server based on the page that the request came from
+            //Handling the response from the server based on the page that the request came from or what buffer size is needed
             if(serialisation.requestSource == "SIGNUP" || serialisation.requestSource == "LOGIN")
             {
                 byte[] readBuffer = new byte[64];
@@ -53,7 +53,7 @@ namespace Networking
                     return "FAILED";
                 }
             }
-            else if(serialisation.requestSource == "JOINCLASS")
+            else if(serialisation.requestSource == "JOINCLASS" || serialisation.requestSource == "REMOVECLASSMEMBER" || serialisation.requestSource == "ACCEPTREQUEST" || serialisation.requestSource == "FINISHMARKING")
             {
                 byte[] readBuffer = new byte[64];
 
@@ -108,9 +108,10 @@ namespace Networking
 
                 return messageFromServer;
             }
-            else if (serialisation.requestSource == "QUIZLIST" || serialisation.requestSource == "DRAFTLIST")
+            //any sort of list that may need a big buffer
+            else if (serialisation.requestSource == "QUIZLIST" || serialisation.requestSource == "DRAFTLIST" || serialisation.requestSource == "HOMEWORKLIST" || serialisation.requestSource == "REQUESTLIST" || serialisation.requestSource == "TEACHERQUIZHISTORY" || serialisation.requestSource == "QUIZMARKINGLIST" || serialisation.requestSource == "GETLEADERBOARD")
             {
-                byte[] readBuffer = new byte[1000];
+                byte[] readBuffer = new byte[3000];
 
                 stream.Read(readBuffer, 0, readBuffer.Length);
                 string messageFromServer = Encoding.Default.GetString(readBuffer);
@@ -118,6 +119,15 @@ namespace Networking
                 return messageFromServer;
             }
             else if (serialisation.requestSource == "OPENQUIZ")
+            {
+                byte[] readBuffer = new byte[2000];
+
+                stream.Read(readBuffer, 0, readBuffer.Length);
+                string messageFromServer = Encoding.Default.GetString(readBuffer);
+
+                return messageFromServer;
+            }
+            else if (serialisation.requestSource == "CLASSMEMBERLIST")
             {
                 byte[] readBuffer = new byte[1000];
 

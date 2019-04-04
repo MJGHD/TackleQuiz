@@ -19,15 +19,17 @@ namespace Tackle.Pages
     {
         int quizID;
         string userType;
+        string username;
         public QuizScreenModel Model { get; set; }
         Timer timer;
         private IEventAggregator eventAggregator;
 
-        public QuizScreenViewModel(int quizID, string userType, IEventAggregator eventAggregator)
+        public QuizScreenViewModel(IEventAggregator eventAggregator, int quizID, string userType, string username)
         {
             this.eventAggregator = eventAggregator;
             this.quizID = quizID;
             this.userType = userType;
+            this.username = username;
             this.Model = new QuizScreenModel();
 
             string JSON = QuizHandling.GetQuizJSON(this.quizID);
@@ -119,7 +121,24 @@ namespace Tackle.Pages
         void DisplayQuestion()
         {
             Model.CurrentQuestion = Model.Questions[Model.CurrentQuestionNumber];
-            if(Model.CurrentQuestionType == 2)
+
+            //Stops values from being null if they are a new question
+            if (Model.CurrentQuestionType == 0)
+            {
+                if(Model.UserInput is null)
+                {
+                    Model.UserInput = "";
+                }
+            }
+            else if(Model.CurrentQuestionType == 1)
+            {
+                if (Model.UserInput is null)
+                {
+                    Model.UserInput = "0";
+                }
+            }
+            //Gets the multiple choices
+            else if(Model.CurrentQuestionType == 2)
             {
                 GetMultipleChoices();
             }
@@ -153,12 +172,11 @@ namespace Tackle.Pages
 
         void FinishQuiz()
         {
-            //TODO: DONT HARDCODE VALUES
-            QuizResults results = new QuizResults(0,"teststudent",Model.QuizType,Model.Questions,Model.UserInputs);
+            QuizResults results = new QuizResults(this.quizID,this.username,Model.QuizType,Model.Questions,Model.UserInputs);
 
             if (Model.QuizType == "Instant")
             {
-                AddInstantQuizValues(results);
+                results = AddInstantQuizValues(results);
             }
 
             //Converts the results object into JSON
@@ -167,7 +185,7 @@ namespace Tackle.Pages
 
             //Creates a server connection to submit the quiz results
             ServerConnection server = new ServerConnection();
-            server.ServerRequest("SUBMITRESULTS",new string[3] { Model.QuizID.ToString(), "teststudent", resultsJSON });
+            server.ServerRequest("SUBMITRESULTS",new string[4] { this.quizID.ToString(), this.username, resultsJSON, results.correctTotal.ToString() });
 
             //Go to the quiz submit screen and pass the QuizResults object
             SubmitPage(results);
@@ -230,7 +248,7 @@ namespace Tackle.Pages
             foreach (string answer in Model.Answers)
             {
                 //String input or multiple choice
-                if (Model.CurrentQuestionType == 0 || Model.CurrentQuestionType == 2)
+                if (Model.QuestionTypes[pointer] == 0 || Model.QuestionTypes[pointer] == 2)
                 {
                     //If it's correct
                     if (Model.UserInputs[pointer] == Model.Answers[pointer])
@@ -244,7 +262,7 @@ namespace Tackle.Pages
                     }
                 }
                 //Integer input
-                else if (Model.CurrentQuestionType == 1)
+                else if (Model.QuestionTypes[pointer] == 1)
                 {
                     //If it's correct
                     if (Int32.Parse(Model.UserInputs[pointer]) == Int32.Parse(Model.Answers[pointer]))

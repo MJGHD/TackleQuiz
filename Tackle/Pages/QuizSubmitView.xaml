@@ -8,32 +8,29 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800">
     <Grid>
-        <TabControl SelectedItem="Model.TabNumber">
-            <!-- Instant quiz -->
-            <TabItem TabIndex="0" Width="0">
-                <Grid>
-                    <!-- Score display -->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock FontSize="45">Your score:</TextBlock>
-                        <TextBlock FontSize="45">22</TextBlock>
-                        <TextBlock FontSize="45">/</TextBlock>
-                        <TextBlock FontSize="45">25</TextBlock>
-                    </StackPanel>
-                    <!-- Leaderboard -->
-                    <ListView>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Users}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </Grid>
-
-            </TabItem>
-            <!-- Non-instant quiz -->
-            <TabItem TabIndex="1" Width="0">
-                
-            </TabItem>
-        </TabControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock>You got: </TextBlock>
+            <TextBlock Text="{Binding Path=Model.CorrectTotal}"/>
+            <TextBlock>/</TextBlock>
+            <TextBlock Text="{Binding Path=Model.QuestionTotal}"/>
+        </StackPanel>
+        <!-- Leaderboard -->
+        <ListView ItemsSource="{Binding Path=Model.LeaderboardEntries}" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <UniformGrid Columns="2">
+                        <TextBlock>Username:</TextBlock>
+                        <TextBlock>Correct total:</TextBlock>
+                        <TextBlock Text="{Binding Path=username}"/>
+                        <TextBlock Text="{Binding Path=correctTotal}"/>
+                    </UniformGrid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

@@ -10,9 +10,8 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Command="{s:Action JoinClass}" Margin="0,0,0,5" FontSize="24">Join a class</Button>
-            <Button Margin="0,0,0,5" FontSize="24">View Homework</Button>
+            <Button Margin="0,0,0,5" FontSize="24" Command="{s:Action ViewHomework}">View Homework</Button>
             <Button Margin="0,0,0,5" FontSize="24" Command="{s:Action ViewQuizzes}">View Public Quizzes</Button>
-            <Button Margin="0,0,0,5" FontSize="24">View Quiz History</Button>
         </StackPanel>
     </Grid>
 </UserControl>

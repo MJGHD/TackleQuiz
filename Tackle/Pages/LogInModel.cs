@@ -40,7 +40,7 @@ namespace Tackle.Pages
         public string EncryptPassword(string unencryptedPassword)
         {
             /*
-            Converts the unencrypted password into a byte array, encrypts it using SHA256, and then converts it 
+            Converts the unencrypted password into a byte array, hashes it using SHA256, and then converts it 
             back into a string
             */
 

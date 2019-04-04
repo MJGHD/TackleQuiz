@@ -95,6 +95,8 @@
       <DependentUpon>DraftListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DraftListViewModel.cs" />
+    <Compile Include="Pages\HomeworkModel.cs" />
+    <Compile Include="Pages\HomeworkViewModel.cs" />
     <Compile Include="Pages\JoinClassModel.cs" />
     <Compile Include="Pages\JoinClassViewModel.cs" />
     <Compile Include="Pages\LogInModel.cs" />
@@ -104,10 +106,17 @@
       <DependentUpon>ManageClassesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ManageClassesViewModel.cs" />
-    <Compile Include="Pages\QuizListModel.cs" />
-    <Compile Include="Pages\QuizListView.xaml.cs">
-      <DependentUpon>QuizListView.xaml</DependentUpon>
+    <Compile Include="Pages\ManageClassPopUpModel.cs" />
+    <Compile Include="Pages\ManageClassPopUpView.xaml.cs">
+      <DependentUpon>ManageClassPopUpView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ManageClassPopUpViewModel.cs" />
+    <Compile Include="Pages\MarkListModel.cs" />
+    <Compile Include="Pages\MarkListView.xaml.cs">
+      <DependentUpon>MarkListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MarkListViewModel.cs" />
+    <Compile Include="Pages\QuizListModel.cs" />
     <Compile Include="Pages\QuizListViewModel.cs" />
     <Compile Include="Pages\QuizScreenModel.cs" />
     <Compile Include="Pages\QuizScreenViewModel.cs" />
@@ -120,6 +129,11 @@
     <Compile Include="Pages\ShellViewModel.cs" />
     <Compile Include="Pages\StudentMainMenuViewModel.cs" />
     <Compile Include="Pages\TeacherMainMenuViewModel.cs" />
+    <Compile Include="Pages\TeacherQuizHistoryModel.cs" />
+    <Compile Include="Pages\TeacherQuizHistoryView.xaml.cs">
+      <DependentUpon>TeacherQuizHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TeacherQuizHistoryViewModel.cs" />
     <Compile Include="Pages\ViewQuizModel.cs" />
     <Compile Include="Pages\ViewQuizViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -161,6 +175,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\HomeworkView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\JoinClassView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,6 +188,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ManageClassesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ManageClassPopUpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MarkListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TeacherMainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TeacherQuizHistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

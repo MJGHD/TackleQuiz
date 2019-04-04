@@ -26,5 +26,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Grid.Row="1" Height="20" Width="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" Command="{s:Action Back}">Back</Button>
     </Grid>
 </UserControl>

@@ -28,6 +28,7 @@
                             <TextBlock>Members:</TextBlock>
                             <TextBlock Text="{Binding Path=classID}"/>
                             <TextBlock Text="{Binding Path=memberCount}"/>
+                            <Button Content="Manage" Command="{s:Action ManageClass}" CommandParameter="{Binding Path=classID}"/>
                             <Button Content="Delete" Command="{s:Action DeleteClass}" CommandParameter="{Binding Path=classID}"/>
                         </UniformGrid>
                     </DataTemplate>
@@ -37,5 +38,23 @@
 
         <Separator Grid.Row="1" Grid.Column="0" VerticalAlignment="Top"/>
         <Separator Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"/>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock>Class requests:</TextBlock>
+            <ListView ItemsSource="{Binding Path=Model.Requests}" Height="250">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <UniformGrid Columns="2">
+                            <TextBlock>Class ID:</TextBlock>
+                            <TextBlock>Username:</TextBlock>
+                            <TextBlock Text="{Binding Path=classID}"/>
+                            <TextBlock Text="{Binding Path=username}"/>
+                            <Button Content="Accept" Command="{s:Action AcceptRequest}" CommandParameter="{Binding Path=pointer}"/>
+                        </UniformGrid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        <Button Grid.Row="1" Height="30" Width="50" VerticalAlignment="Bottom" Command="{s:Action Back}">Back</Button>
     </Grid>
 </UserControl>

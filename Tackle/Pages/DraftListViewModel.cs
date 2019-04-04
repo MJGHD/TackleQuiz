@@ -1,4 +1,5 @@
-﻿using Networking;
+﻿using EventAggr;
+using Networking;
 using Newtonsoft.Json;
 using Stylet;
 
@@ -52,6 +53,13 @@ namespace Tackle.Pages
                 this.Model.List.Add(new Quizzes() { quizID = quizID, quizName = list.quizNames[counter], quizType = list.quizType[counter], username = list.usernames[counter] });
                 counter += 1;
             }
+        }
+
+        public void Back()
+        {
+            ChangePageEvent changePage = new ChangePageEvent();
+            changePage.pageName = "TeacherMainMenu";
+            this.eventAggregator.Publish(changePage);
         }
     }
 }

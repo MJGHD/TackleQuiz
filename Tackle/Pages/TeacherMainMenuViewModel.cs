@@ -39,5 +39,19 @@ namespace Tackle.Pages
             changePage.pageName = "DraftList";
             this.eventAggregator.Publish(changePage);
         }
+
+        public void ViewSetQuizzes()
+        {
+            ChangePageEvent changePage = new ChangePageEvent();
+            changePage.pageName = "ViewSetQuizzes";
+            this.eventAggregator.Publish(changePage);
+        }
+
+        public void MarkQuizList()
+        {
+            ChangePageEvent changePage = new ChangePageEvent();
+            changePage.pageName = "MarkQuizList";
+            this.eventAggregator.Publish(changePage);
+        }
     }
 }

@@ -3,6 +3,7 @@ using Stylet;
 using System.Windows;
 using EventAggr;
 using System.Diagnostics;
+using Networking;
 
 namespace Tackle.Pages
 {
@@ -56,6 +57,9 @@ namespace Tackle.Pages
             if (this.Model.CurrentQuestionNumber == this.Model.Questions.Length)
             {
                 FinishMarking();
+
+                //if the sending to the server fails, goes back a question so that it doesn't try to access a value that isn't there
+                this.Model.CurrentQuestionNumber -= 1;
             }
             else
             {
@@ -82,9 +86,42 @@ namespace Tackle.Pages
             }
         }
 
+        //gets the total amount of correct questions
+        string GetCorrectTotal()
+        {
+            int total = 0;
+
+            foreach(bool correct in this.Model.CorrectQuestions)
+            {
+                if (correct)
+                {
+                    total += 1;
+                }
+            }
+            return total.ToString();
+        }
+
         void FinishMarking()
         {
-            Debug.WriteLine(this.Model.CorrectQuestions[this.Model.CorrectQuestions.Length-1]);
+            string correctTotal = GetCorrectTotal();
+
+            //updates the amount of correct questions in the QuizAttempts table
+            ServerConnection server = new ServerConnection();
+            string success = server.ServerRequest("FINISHMARKING", new string[] { this.Model.Username, this.Model.QuizID.ToString(), correctTotal});
+            success = success.Replace("\0", string.Empty);
+
+            if (success == "success")
+            {
+                MessageBox.Show("Updated the correct total");
+
+                ChangePageEvent changePage = new ChangePageEvent();
+                changePage.pageName = "TeacherMainMenu";
+                this.eventAggregator.Publish(changePage);
+            }
+            else
+            {
+                MessageBox.Show("Failed to update the correct total");
+            }
         }
     }
 }

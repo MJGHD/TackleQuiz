@@ -49,16 +49,16 @@ namespace Quiz
             return quizInstance;
         }
 
-        //Used temporarily to store the values when deserialising the quiz attempt
-        class QuizInstance
-        {
-            public int quizID { get; set; }
-            public string username { get; set; }
-            public string quizType { get; set; }
-            public string[] questions { get; set; }
-            public string[] answers { get; set; }
-            public int correctTotal { get; set; }
-            public bool[] correct { get; set; }
-        }
+    }
+    //Used temporarily to store the values when deserialising the quiz attempt
+    public class QuizInstance
+    {
+        public int quizID { get; set; }
+        public string username { get; set; }
+        public string quizType { get; set; }
+        public string[] questions { get; set; }
+        public string[] answers { get; set; }
+        public int correctTotal { get; set; }
+        public bool[] correct { get; set; }
     }
 }

@@ -1,17 +1,21 @@
 ﻿
 FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\App.xaml;;
+FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\ClassSendView.xaml;;
 FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\CreateQuizView.xaml;;
+FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\DraftListView.xaml;;
+FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\HomeworkView.xaml;;
 FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\JoinClassView.xaml;;
 FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\LogInView.xaml;;
+FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\ManageClassesView.xaml;;
+FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\ManageClassPopUpView.xaml;;
+FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\MarkListView.xaml;;
+FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\QuizListView.xaml;;
 FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\QuizScreenView.xaml;;
+FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\QuizSelectView.xaml;;
 FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\QuizSubmitView.xaml;;
 FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\ShellView.xaml;;
 FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\StudentMainMenuView.xaml;;
 FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\TeacherMainMenuView.xaml;;
+FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\TeacherQuizHistoryView.xaml;;
 FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\ViewQuizView.xaml;;
-FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\QuizListView.xaml;;
-FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\ManageClassesView.xaml;;
-FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\ClassSendView.xaml;;
-FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\DraftListView.xaml;;
-FC:\Users\Myles\Documents\CompSci\TackleQuiz\Tackle\Pages\QuizSelectView.xaml;;
 
