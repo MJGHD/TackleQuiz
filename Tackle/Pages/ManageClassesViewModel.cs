@@ -15,8 +15,6 @@ namespace Tackle.Pages
         IEventAggregator eventAggregator;
         IWindowManager windowManager;
         
-        //CURRENTLY WORKING ON - class management pop up, figuring out why the server is returning the wrong thing w/ accepting class requests
-
         public ManageClassesViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, string username)
         {
             this.Model = new ManageClassesModel();
@@ -45,6 +43,7 @@ namespace Tackle.Pages
 
         public void ManageClass(int classID)
         {
+            //show class management dialog with the list of members
             this.windowManager.ShowDialog(new ManageClassPopUpViewModel(this.windowManager, classID));
         }
 
@@ -64,6 +63,7 @@ namespace Tackle.Pages
             }
         }
 
+        //accepting a class request
         public void AcceptRequest(int pointer)
         {
             ServerConnection server = new ServerConnection();
@@ -80,6 +80,7 @@ namespace Tackle.Pages
             }
         }
 
+        //gets the list of classes and class joining requests
         void RefreshList()
         {
             //gets the class list
@@ -100,6 +101,7 @@ namespace Tackle.Pages
             FillModel(list, requests);
         }
 
+        //fills the model with the values to be displayed by the view
         void FillModel(ClassList list, ClassRequests requests)
         {
             //clears the lists so they doesnt just append the new values on when refreshing

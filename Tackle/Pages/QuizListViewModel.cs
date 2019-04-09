@@ -54,10 +54,12 @@ namespace Tackle.Pages
 
         public void Select(int quizID)
         {
+            //if the user is a teacher, show the quiz select pop up
             if (this.userType == "TEACHER")
             {
                 this.windowManager.ShowDialog(new QuizSelectViewModel(quizID.ToString(), this.username, false, this.eventAggregator, this.windowManager));
-                if(!(this.Model.SearchText is null))
+                //if the search text isn't blank, then refresh the list of quizzes with the search query. if it is, then a blank search query is requested
+                if (!(this.Model.SearchText is null))
                 {
                     SendQuizRequest(this.Model.SearchText);
                 }
@@ -66,6 +68,7 @@ namespace Tackle.Pages
                     SendQuizRequest("");
                 }
             }
+            //if the user is a student, take the quiz normally
             else
             {
                 TakeQuiz(quizID);
@@ -87,6 +90,7 @@ namespace Tackle.Pages
 
         public void Back()
         {
+            //back button takes the user back to their respective main menu
             ChangePageEvent changePage = new ChangePageEvent();
             if(this.userType == "STUDENT")
             {

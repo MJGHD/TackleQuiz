@@ -30,6 +30,7 @@ namespace Tackle.Pages
 
         public void TakeQuiz()
         {
+            //if the teacher wants to take a quiz, then pass the quiz ID to the QuizScreenViewModel
             ChangePageEvent changePage = new ChangePageEvent();
             changePage.pageName = "TakeQuiz";
             changePage.quizID = Int32.Parse(quizID);
@@ -39,6 +40,7 @@ namespace Tackle.Pages
 
         public void Edit()
         {
+            //puts the quiz ID into the quiz edit page so that the teacher can edit the quiz as if it's their own
             ChangePageEvent changePage = new ChangePageEvent();
             changePage.pageName = "EditQuiz";
             changePage.quizID = Int32.Parse(quizID);
@@ -48,17 +50,21 @@ namespace Tackle.Pages
 
         public void SendToClass()
         {
+            //shows the send to class dialog pop up, which returns the quiz ID
             var classIDViewModel = new ClassSendViewModel(this.eventAggregator);
             this.windowManager.ShowDialog(classIDViewModel);
 
-            Debug.WriteLine(this.quizID);
+            // used in testing to make sure that the correct quiz ID was being returned
+            //Debug.WriteLine(this.quizID);
 
+            //sends the quiz to the class
             ServerConnection server = new ServerConnection();
             string success = server.ServerRequest("SENDTOCLASS", new string[] { this.username, this.classID, this.quizID });
 
             //Removes UTF-8 encoding's annoying "\0" character for whitespaece
             success = success.Replace("\0", string.Empty);
 
+            //shows whether sending to the class was a success
             if(success == "success")
             {
                 MessageBox.Show("Successfully sent quiz to class");
@@ -71,6 +77,7 @@ namespace Tackle.Pages
 
         public void Delete()
         {
+            //if it's a deletable quiz (not public), then send a server request to delete it
             if (this.deletable)
             {
                 ServerConnection server = new ServerConnection();

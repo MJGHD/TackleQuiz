@@ -11,7 +11,7 @@ namespace Networking
     {
         public string ServerRequest(string source, string[] parameters)
         {
-            IPAddress ServerIP = IPAddress.Parse("192.168.1.140");
+            IPAddress ServerIP = IPAddress.Parse("192.168.42.38");
             TcpClient client = new TcpClient();
 
             //Connects the client to the server and creates a TCP communication stream
@@ -30,13 +30,17 @@ namespace Networking
             //Handling the response from the server based on the page that the request came from or what buffer size is needed
             if(serialisation.requestSource == "SIGNUP" || serialisation.requestSource == "LOGIN")
             {
+                //buffer to put the server response into
                 byte[] readBuffer = new byte[64];
 
                 stream.Read(readBuffer, 0, readBuffer.Length);
+                //turns byte array into a readable string
                 string messageFromServer = Encoding.Default.GetString(readBuffer);
 
+                //converts the JSON from the server into an object
                 LogInResponse response = JsonConvert.DeserializeObject<LogInResponse>(messageFromServer);
 
+                //respond with whether it was a success, and if it was then return the type of user 
                 if (response.requestSuccess)
                 {
                     if(response.isTeacher == true)

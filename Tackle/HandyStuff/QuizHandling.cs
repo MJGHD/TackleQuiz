@@ -5,6 +5,7 @@ namespace Quiz
 {
     public class QuizHandling
     {
+        // gets the a quiz' content represented as JSON
         public static string GetQuizJSON(int quizID)
         {
             ServerConnection server = new ServerConnection();
@@ -42,7 +43,7 @@ namespace Quiz
                 return (quizInstance.quizID, quizInstance.username, quizInstance.quizType, quizInstance.questions, quizInstance.answers, quizInstance.correct, false);
             }
         }
-
+        //Deserialises the quiz attempt JSON into a QuizInstance object
         static QuizInstance DeserialiseQuizAttempt(string JSON, QuizInstance quizInstance)
         {
             quizInstance = JsonConvert.DeserializeObject<QuizInstance>(JSON);

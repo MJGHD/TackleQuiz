@@ -15,6 +15,7 @@ namespace Tackle.Pages
 
         public void Close()
         {
+            //returns the class ID that was entered by the user
             this.eventAggregator.Publish(this.Model.ClassID);
             this.RequestClose(true);
         }

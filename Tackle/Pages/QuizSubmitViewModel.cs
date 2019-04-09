@@ -23,12 +23,14 @@ namespace Tackle.Pages
 
         void GetLeaderboard()
         {
+            //gets the Leaderboards object from the server
             ServerConnection server = new ServerConnection();
             string JSON = server.ServerRequest("GETLEADERBOARD", new string[] { this.results.quizID.ToString() });
             this.Model.Leaderboard = JsonConvert.DeserializeObject<Leaderboards>(JSON);
 
             int counter = 0;
 
+            //iterates through the server response to add each leaderboard entry to the BindableCollection in the Model to be displayed in the view
             foreach(string username in this.Model.Leaderboard.usernames)
             {
                 string correctNo = this.Model.Leaderboard.correct[counter];

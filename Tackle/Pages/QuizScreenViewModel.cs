@@ -32,9 +32,11 @@ namespace Tackle.Pages
             this.username = username;
             this.Model = new QuizScreenModel();
 
+            //gets the quiz JSON and then fills the model with the quiz's content
             string JSON = QuizHandling.GetQuizJSON(this.quizID);
             (Model.Questions, Model.QuestionTypes, Model.Answers, Model.TimeLeft, Model.QuizType) = QuizHandling.OpenQuiz(JSON);
 
+            //creates a string array that the user's inputs will go into
             Model.UserInputs = new string[Model.Questions.Length];
             this.Model.NextButtonText = "Next Question";
             SetFirstQuestion();
@@ -90,6 +92,7 @@ namespace Tackle.Pages
             }
             else
             {
+                //increase the question number by one and then set the question's information
                 Model.CurrentQuestionNumber += 1;
                 SetCurrentAnswer();
                 if (Model.CurrentQuestionNumber + 1 == Model.Questions.Length)
@@ -109,6 +112,7 @@ namespace Tackle.Pages
 
         public void PreviousQuestion()
         {
+            //saves the current answer and then goes onto the next question
             SaveCurrentAnswer();
             Model.NextButtonText = "Next Question";
             Model.CurrentQuestionNumber -= 1;
@@ -151,6 +155,7 @@ namespace Tackle.Pages
 
         public void SetFirstQuestion()
         {
+            //sets values for the first question
             Model.CurrentQuestionNumber = 0;
             Model.QuestionNumberDisplay = $"Question {Model.CurrentQuestionNumber + 1}/{Model.Questions.Length}";
             SetQuestionType();
@@ -221,7 +226,9 @@ namespace Tackle.Pages
 
         public void Quit()
         {
+            //asks the user if they want to quit with Yes/No buttons
             MessageBoxResult result = MessageBox.Show("Are you sure you want to quit?","Quit quiz",MessageBoxButton.YesNo);
+            //if the user wants to quit, then go back to the respective main menu
             if(result.ToString() == "Yes")
             {
                 Debug.WriteLine(this.userType);

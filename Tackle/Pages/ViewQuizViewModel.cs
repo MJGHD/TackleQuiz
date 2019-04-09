@@ -19,6 +19,7 @@ namespace Tackle.Pages
             this.Model = new ViewQuizModel();
 
             bool success;
+            //gets the quiz attempt information from the server
             (Model.QuizID, Model.Username, Model.QuizType, Model.Questions, Model.Answers, Model.CorrectQuestions,success) = QuizHandling.GetQuizInformation(username,quizID);
 
             if(success == false)

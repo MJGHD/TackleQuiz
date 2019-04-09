@@ -54,11 +54,13 @@ namespace Tackle.Pages
             }
         }
 
+        //select button logic
         public void Select(int quizID)
         {
             TakeQuiz(quizID);
         }
 
+        // makes it so the student plays the quiz, with the ID of the quiz being passed to QuizScreenViewModel
         void TakeQuiz(int quizID)
         {
             ChangePageEvent changePage = new ChangePageEvent();

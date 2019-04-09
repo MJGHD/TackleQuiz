@@ -28,11 +28,12 @@ namespace Tackle.Pages
 
         public void Select(int quizID)
         {
+            // show the quiz select pop up and once this has been handled, refresh the list in case there's any changes (e.g. deleting of the quiz)
             this.windowManager.ShowDialog(new QuizSelectViewModel(quizID.ToString(), this.username, true, this.eventAggregator, this.windowManager));
             RequestList();
         }
 
-        //Sends the quiz list request to the server and then fills the Model with the quizzes
+        //Sends the draft list request to the server and then fills the Model with the quizzes
         void RequestList()
         {
             ServerConnection server = new ServerConnection();

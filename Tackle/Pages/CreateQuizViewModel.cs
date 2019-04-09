@@ -10,9 +10,6 @@ using JSON;
 using Quiz;
 using System.Collections.Generic;
 
-//TOOO: multiple choice denormalisation when editing a quiz
-//       if when finishing a quiz they haven't marked as public, ask if they want to save as a draft or send to a class
-
 namespace Tackle.Pages
 {
     class CreateQuizViewModel : IHandle<string>
@@ -30,6 +27,7 @@ namespace Tackle.Pages
             //subscribe to the event aggregator for sending the quiz to a class at the end
             eventAggregator.Subscribe(this);
 
+            //sets everything up as it should be and assigns the default values for editing a quiz from the first question
             this.windowManager = windowManager;
 
             this.Model = new CreateQuizModel();
@@ -40,7 +38,7 @@ namespace Tackle.Pages
             this.Model.NextButtonText = "Add question";
             this.Model.Public = true;
             
-
+            // quiz ID being -1 means that it's a new quiz, if the quiz ID put into the ViewModel as a parameter isn't -1 then load the quiz contents from the server
             if (quizID != -1)
             {
                 string JSON = QuizHandling.GetQuizJSON(quizID);
@@ -86,6 +84,7 @@ namespace Tackle.Pages
             }
         }
 
+        //Sets up the model's properties to contain the content of that question
         void SetUpQuestion()
         {
             //Add blank question, answer and question type to the question, answer and question types lists
@@ -98,6 +97,7 @@ namespace Tackle.Pages
                 this.Model.MultiChoiceAnswers.Add("");
             }
 
+            //assigns the values of the question to the model's properties
             this.Model.CurrentQuestionType = this.Model.QuestionTypes[this.Model.CurrentQuestionNumber];
 
             this.Model.CurrentQuestion = this.Model.Questions[this.Model.CurrentQuestionNumber];
@@ -108,7 +108,7 @@ namespace Tackle.Pages
             this.Model.MultipleChoiceInputs = this.Model.AllMultipleChoiceInputs[this.Model.CurrentQuestionNumber];
             this.Model.MultipleChoiceAnswer = this.Model.MultiChoiceAnswers[this.Model.CurrentQuestionNumber];
 
-            //Set up next button text
+            //Set up next button text - if the current question is the last one, then the program will add a question so "Add Question" will be displayed instead of "Next Question"
             if (this.Model.CurrentQuestionNumber == this.Model.Questions.Count - 1)
             {
                 this.Model.NextButtonText = "Add question";
@@ -121,7 +121,7 @@ namespace Tackle.Pages
 
         public void DeleteQuestion()
         {
-            //If it's not the only page, delete
+            //If it's not the only page, delete - this means that you can't have a totally blank quiz with 0 questions
             if(this.Model.Questions.Count > 1){
                 this.Model.Answers.RemoveAt(this.Model.CurrentQuestionNumber);
                 this.Model.Questions.RemoveAt(this.Model.CurrentQuestionNumber);
